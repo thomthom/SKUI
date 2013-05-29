@@ -19,9 +19,11 @@ module SKUI
     prop_bool( :visible )
 
     prop( :name )
-    prop( :left, :top ) # :right, :bottom
+    prop( :left, :top, :right, :bottom )
     prop( :width, :height )
     prop( :tooltip )
+
+    prop_writer( :font_name, :font_size ) # (!) Needs more work.
 
     attr_accessor( :properties )
     attr_accessor( :parent, :window )
@@ -90,7 +92,10 @@ module SKUI
       "0x%x" % ( self.object_id << 1 )
     end
 
-    # @param [Symbol...] properties
+    # Call this method whenever a control property changes, spesifying which
+    # properties changed. This is sent to the WebDialog for syncing.
+    #
+    # @param [Symbol] *properties
     #
     # @return [Boolean]
     # @since 1.0.0

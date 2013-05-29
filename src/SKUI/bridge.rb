@@ -14,6 +14,12 @@ module SKUI
     class CommunicationError < StandardError; end
 
     # @since 1.0.0
+    attr_accessor( :webdialog, :window )
+
+    # @param [SKUI::Window] window
+    # @param [UI::WebDialog] webdialog
+    #
+    # @since 1.0.0
     def initialize( window, webdialog )
       @window = window
       @webdialog = webdialog
@@ -28,6 +34,7 @@ module SKUI
     #  return_value = window.bridge.call('alert', 'Hello World')
     #
     # @param [String] function Name of JavaScript function to call.
+    # @param [Mixed] *args List of arguments for the function call.
     #
     # @return [Mixed]
     # @since 1.0.0
@@ -68,10 +75,6 @@ module SKUI
       eval( raw_data ) # (?) Bind to top level scope?
     end
 
-    # Internal method.
-    # 
-    # @private
-    #
     # @param [Control] control
     #
     # @return [Nil]
@@ -81,6 +84,8 @@ module SKUI
       nil
     end
 
+    # @param [ContainerControl] container
+    #
     # @return [Nil]
     # @since 1.0.0
     def add_container( container )

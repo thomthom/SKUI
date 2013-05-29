@@ -80,7 +80,7 @@ module SKUI
       super
     end
     
-    # @param [Control] remove_control
+    # @param [Control] control
     #
     # @return [Boolean] +True+ if the webdialog was open and the control removed.
     # @since 1.0.0
@@ -95,24 +95,6 @@ module SKUI
         return true
       end
       false
-    end
-
-    private
-
-    # While #add_control add the control to the Ruby class's internal list, this
-    # method adds the control to the webdialog.
-    #
-    # @private
-    # @return [Nil]
-    # @since 1.0.0
-    def add_controls_to_webdialog
-      for control in @controls
-        @window.bridge.add_control( control )
-        if control.is_a?( ContainerControl )
-          control.send( :add_controls_to_webdialog )
-        end
-      end
-      nil
     end
     
   end # module

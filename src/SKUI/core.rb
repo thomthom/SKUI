@@ -5,6 +5,9 @@ require 'sketchup.rb'
 module SKUI
    
   # @since 1.0.0
+  VERSION = '0.1.0'.freeze
+
+  # @since 1.0.0
   PATH      = File.dirname( __FILE__ ).freeze
   PATH_JS   = File.join( PATH, 'js' ).freeze
   PATH_CSS  = File.join( PATH, 'css' ).freeze

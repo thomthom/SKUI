@@ -26,8 +26,8 @@ module SKUI
       #
       # Actual:  75x23
       # Visible: 73x21
-      @properties[ :width ]  = 73
-      @properties[ :height ] = 21
+      @properties[ :width ]  = 75
+      @properties[ :height ] = 23
 
       @properties[ :caption ] = caption
 

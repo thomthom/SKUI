@@ -96,11 +96,13 @@ module SKUI
       true
     end
 
+    # @return [Nil]
     # @since 1.0.0
     def bring_to_front
       @webdialog.bring_to_front
     end
 
+    # @return [Nil]
     # @since 1.0.0
     def close
       @webdialog.close
@@ -112,11 +114,21 @@ module SKUI
       "<#{self.class}:#{object_id_hex()}>"
     end
 
+    # @overload set_position( left, top )
+    #   @param [Numeric] left
+    #   @param [Numeric] top
+    #
+    # @return [Nil]
     # @since 1.0.0
     def set_position( *args )
       @webdialog.set_position( *args )
     end
 
+    # @overload set_size( width, height )
+    #   @param [Numeric] width
+    #   @param [Numeric] height
+    #
+    # @return [Nil]
     # @since 1.0.0
     def set_size( *args )
       @webdialog.set_size( *args )
@@ -153,11 +165,21 @@ module SKUI
       @options[:title].dup
     end
 
+    # @return [Boolean]
     # @since 1.0.0
     def visible?
       @webdialog.visible?
     end
 
+    # @overload write_image( image_path, top_left_x, top_left_y,
+    #                        bottom_right_x, bottom_right_y )
+    #   @param [String] image_path
+    #   @param [Numeric] top_left_x
+    #   @param [Numeric] top_left_y
+    #   @param [Numeric] bottom_right_x
+    #   @param [Numeric] bottom_right_y
+    #
+    # @return [Nil]
     # @since 1.0.0
     def write_image( *args )
       @webdialog.write_image( *args )
@@ -174,15 +196,22 @@ module SKUI
     def add_callback( webdialog, callback_name, method_id )
       proc = method( method_id ).to_proc
       webdialog.add_action_callback( callback_name, &proc )
+      nil
     end
 
     # Called when the HTML DOM is ready.
     #
+    # @param [UI::WebDialog] webdialog
+    # @param [String] params
+    #
+    # @return [Nil]
     # @since 1.0.0
     def event_window_ready( webdialog, params )
       Debug.puts( '>> Dialog Ready' )
       self.bridge.add_container( self )
+      # (!) Inject theme CSS.
       self.trigger_event( :ready )
+      nil
     end
     
     # Called when a control triggers an event.
@@ -190,6 +219,10 @@ module SKUI
     #   "<ui_id>||<event>"
     #   "<ui_id>||<event>||arg1,arg2,arg3"
     #
+    # @param [UI::WebDialog] webdialog
+    # @param [String] params
+    #
+    # @return [Nil]
     # @since 1.0.0
     def event_callback( webdialog, params )
       Debug.puts( '>> Event Callback' )
@@ -208,16 +241,25 @@ module SKUI
           control.trigger_event( event )
         end
       end
+      nil
     end
 
     # Called when a URL link is clicked.
     #
+    # @param [UI::WebDialog] webdialog
+    # @param [String] params
+    #
+    # @return [Nil]
     # @since 1.0.0
     def event_open_url( webdialog, params )
       Debug.puts( '>> Open URL' )
       UI.openURL( params )
+      nil
     end
 
+    # @○param [Hash] options Same as #initialize
+    #
+    # @return [UI::WebDialog]
     # @since 1.0.0
     def init_webdialog( options )
       # Convert options to Webdialog arguments.
@@ -269,18 +311,15 @@ module SKUI
           webdialog.max_width = options[:height_limit]
         end
       end
-      # (!) Configure event handlers.
-      #     * Inject theme CSS
-
-      html_file = File.join( PATH_HTML, 'window.html' )
-      webdialog.set_file( html_file )
-
       # (i) If procs are created in the initalize method for #add_action_callback
       #     then the WebDialog instance will not GC.
       add_callback( webdialog, 'SKUI_Window_Ready',   :event_window_ready )
       add_callback( webdialog, 'SKUI_Event_Callback', :event_callback )
       add_callback( webdialog, 'SKUI_Open_URL',       :event_open_url )
-
+      # (i) There appear to be differences between OS when the HTML content
+      #     is prepared. OSX loads HTML on #set_file? Inspect this.
+      html_file = File.join( PATH_HTML, 'window.html' )
+      webdialog.set_file( html_file )
       webdialog
     end
 

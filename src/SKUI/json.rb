@@ -120,6 +120,9 @@ module SKUI
     
     # Compile JSON Hash into a string.
     #
+    # @param [Boolean] format Set to true for pretty print.
+    #
+    # @return [String]
     # @since 1.0.0
     def to_s( format = false )
       data = self.map { |key, value|
@@ -135,6 +138,7 @@ module SKUI
     # Converts given Ruby object to a JavaScript string.
     #
     # @param [Object] object
+    # @param [Boolean] format Set to true for pretty print.
     #
     # @return [String]
     # @since 1.0.0
