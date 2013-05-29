@@ -78,6 +78,16 @@ module SKUI
       [ width, height ]
     end
 
+    # @since 1.0.0
+    def stretch( left, top, right, bottom )
+      @properties[ :left ]   = left
+      @properties[ :top ]    = top
+      @properties[ :right ]  = right
+      @properties[ :bottom ] = bottom
+      update_properties( :left, :top, :right, :bottom )
+      [ left, top, right, bottom ]
+    end
+
     # @return [String]
     # @since 1.0.0
     def typename
