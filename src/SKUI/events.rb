@@ -50,6 +50,16 @@ module SKUI
       @events[event] << block
       nil
     end
+
+    # Detaches all event handlers. Useful when one want to allow the objects to
+    # be garbage collected.
+    #
+    # @return [nil]
+    # @since 1.0.0
+    def release_events
+      @events.clear
+      nil
+    end
     
     # Triggers the given event. All attached procs for the given event will be
     # called. If any event handler raises an error the remaining handlers will

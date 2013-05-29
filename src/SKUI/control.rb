@@ -42,14 +42,32 @@ module SKUI
       "<#{self.class}:#{object_id_hex()}>"
     end
 
+    # @param [Numeric] left
+    # @param [Numeric] top
+    #
     # @since 1.0.0
-    def position( left, top, right = nil, bottom = nil )
+    def position( left, top )
       @properties[ :left ] = left
       @properties[ :top ]  = top
       update_properties( :left, :top )
       [ left, top ]
     end
 
+    # Release all references to other objects. Setting them to nil. So that
+    # the GC can collect them.
+    #
+    # @return [Nil]
+    # @since 1.0.0
+    def release!
+      release_events()
+      @parent = nil
+      @window = nil
+      nil
+    end
+
+    # @param [Numeric] width
+    # @param [Numeric] height
+    #
     # @since 1.0.0
     def size( width, height )
       @properties[ :width ]  = width
