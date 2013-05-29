@@ -34,7 +34,7 @@ module SKUI
       # @properties contains all the data that must be shared with the webdialog
       # in order to sync everything on both ends.
       @properties = JSON.new
-      @properties[ :ui_id ]   = "UI_#{object_id()}"
+      @properties[ :ui_id ] = "UI_#{object_id()}"
       @properties[ :type ] = typename()
     end
 

@@ -59,14 +59,14 @@ Color.prototype.toString = function()
 
 
 var Sketchup = function() {
-  
+
   // http://jsfiddle.net/thomthom/cN4Rb/3/
   // (?) Extract 'Mac' from OSX' 'Mac; Safari' platform string?
   var environment_regex = /SketchUp\/(\d+\.\d+)\s\(([^)]+)\)/;
   var environment = environment_regex.exec( navigator.userAgent );
-  
+
   return {
-  
+
     /* Relay events back to the webdialog.
      */
     callback : function( controlID, event, args ) {
@@ -78,7 +78,7 @@ var Sketchup = function() {
       }
       window.location = 'skp:SKUI_Event_Callback@'+params;
     },
-    
+
     /* Returns the hosting SketchUp version from the user agent string.
      * (i) Supported SketchUp versions:
      *     Windows: SketchUp 8 (?)
@@ -91,7 +91,7 @@ var Sketchup = function() {
         return environment[1];
       }
     },
-    
+
     /* Returns the host platform from the user agent string.
      * (i) Supported SketchUp versions:
      *     Windows: SketchUp 8 (?)
@@ -104,7 +104,7 @@ var Sketchup = function() {
         return environment[2]; // 'WIN'
       }
     },
-    
+
     /* Return true if SketchUp is the host for the WebDialog.
      * (i) Supported SketchUp versions:
      *     Windows: SketchUp 8 (?)
@@ -113,10 +113,10 @@ var Sketchup = function() {
     is_host : function() {
       return environment != null;
     }
-    
-    
+
+
   };
-  
+
 }(); // Sketchup
 
 
@@ -128,9 +128,9 @@ var Sketchup = function() {
 
 
 var System = function() {
-  
+
   return {
-    
+
     font_names : function() {
       var rgFonts = new Array();
       if ( Sketchup.platform() == 'PC' ) {
@@ -152,10 +152,10 @@ var System = function() {
       }
       return rgFonts;
     }
-    
-    
+
+
   };
-  
+
 }(); // System
 
 
@@ -169,17 +169,17 @@ if ( true ) {
   /* Console namespace */
   var Console = function() {
     return {
-    
-    
+
+
       /* Relay events back to the webdialog.
        */
       log : function( string ) {
         Sketchup.callback( 'Console', 'log', string );
       }
-      
-      
+
+
     };
-    
+
   }(); // Console
 }
 
@@ -193,64 +193,37 @@ if ( true ) {
 
 var WebDialog = function() {
   return {
-  
-  
+
+
     /* Returns an array of the viewports' size.
      */
     get_client_size : function() {
       return [ $(window).width(), $(window).height() ];
     },
-    
-    /* Returns the HTML for the given UI ID.
-     */
-    get_checkbox_state : function( ui_id ) {
-      return $('#'+ui_id+' input').prop('checked');
-    },
-    
-    
-    /* Returns the HTML for the given jQuery selector.
-     */
-    get_checked_state : function( selector ) {
-      return $(selector).prop('checked');
-    },
-    
-    
-    /* Returns the HTML for the given jQuery selector.
-     */
-    get_html : function(selector) {
-      return $(selector).html();
-    },
-    
-    
-    /* Returns the HTML for the given jQuery selector.
-     */
-    get_text : function(selector) {
-      return $(selector).text();
-    },
-    
-    
+
+
     /* Returns the IE document mode.
      */
     documentMode : function() {
       return document.documentMode;
     },
-    
-    
+
+
     /* Returns the quirks mode for the document.
      */
     compatMode : function() {
       // CSS1Compat = Standard
       return document.compatMode;
     },
-    
-    
+
+
     userAgent : function() {
       return navigator.userAgent;
     }
-    
-    
+
+
   };
-  
+
 }(); // WebDialog
 
 
@@ -263,45 +236,73 @@ var WebDialog = function() {
 
 var Bridge = function() {
   return {
-    
-    
+
+
     /* Escapes backslashes and single quotes.
      * (private ?)
      */
     escape_string : function( value ) {
       return value.replace('\\', '\\\\').replace("'", "\'");
     },
-    
-    
+
+
     /* Executes a Javascript command and returns the return value to the
      * Ruby bridge.
      */
     execute : function( code_string ) {
-      // Clean up <SCRIPT></SCRIPT> elements which Ruby UI::WebDialog.execute_script
-      // leaves behind.
+      // Clean up <SCRIPT></SCRIPT> elements which Ruby
+      // UI::WebDialog.execute_script leaves behind.
       $('body script').detach();
-      // Execute the JavaScript code and put the return value back into the bridge.
+      // Execute the JavaScript code and put the return value back into the
+      // bridge.
       // (!) Catch error.
       Bridge.return_ruby( eval(code_string) );
     },
-    
-    
-    
+
+
+    /* Returns the checked state for the Checkbox control given by UI ID.
+     */
+    get_checkbox_state : function( ui_id ) {
+      return $('#'+ui_id+' input').prop('checked');
+    },
+
+
+    /* Returns the checked state for the given jQuery selector.
+     */
+    get_checked_state : function( selector ) {
+      return $(selector).prop('checked');
+    },
+
+
+    /* Returns the HTML for the given jQuery selector.
+     */
+    get_html : function(selector) {
+      return $(selector).html();
+    },
+
+
+    /* Returns the text for the given jQuery selector.
+     */
+    get_text : function(selector) {
+      return $(selector).text();
+    },
+
+
     /* Resets the Ruby bridge.
      */
     reset : function() {
       $('#SKUI_RUBY_BRIDGE').val( '' );
     },
-    
-    
+
+
     /* Returns a Javascript object to the Ruby bridge element so that SketchUp
      * Ruby script can fetch the value.
      */
     return_ruby : function( value ) {
       $('#SKUI_RUBY_BRIDGE').val( Bridge.value_to_ruby(value) );
     },
-    
-    
+
+
     /* Converts Javascript objects into Ruby objects.
      *
      * TODO:
@@ -334,7 +335,7 @@ var Bridge = function() {
           ruby_string = 'nil';
           break;
         case 'array':
-          ruby_values = $.map(value, function(value, index) { 
+          ruby_values = $.map(value, function(value, index) {
             return Bridge.value_to_ruby( value );
           });
           ruby_string = '[' + ruby_values.join(',') + ']';
@@ -355,10 +356,10 @@ var Bridge = function() {
       }
       return ruby_string;
     }
-    
-    
+
+
   };
-  
+
 }(); // Bridge
 
 
@@ -371,8 +372,8 @@ var Bridge = function() {
 
 var UI = function() {
   return {
-  
-  
+
+
     init : function() {
       // Ruby Bridge
       bridge = $('<input id="SKUI_RUBY_BRIDGE" name="SKUI_RUBY_BRIDGE" type="hidden" />');
@@ -393,20 +394,8 @@ var UI = function() {
       // Ready Event
       window.location = 'skp:SKUI_Window_Ready';
     },
-    
-    
-    /* Toggle the content DIV of the clicked element this function is attached to.
-     * Attach this event to the Click event of its sibling;
-     * <div>
-     *   <h2>Section Header</h2>
-     *   <div>Content DIV which is toggled.</div>
-     * </div>
-     */
-    toggle_content : function() {
-      $(this).siblings('div').slideToggle('fast');
-    },
-    
-    
+
+
     // Ensure links are opened in the default browser.
     redirect_links : function() {
       $('a.url').live('click', function()
@@ -415,24 +404,24 @@ var UI = function() {
         return false;
       } );
     },
-    
-    
+
+
     // Ensure links are opened in the default browser.
     disable_select : function() {
       $(document).on('mousedown selectstart', function(e) {
         return $(e.target).is('input, textarea, select, option');
       });
     },
-    
-    
+
+
     // Ensure links are opened in the default browser.
     disable_context_menu : function() {
       $(document).on('contextmenu', function(e) {
         return $(e.target).is('input[type=text], textarea');
       });
     },
-    
-    
+
+
     /* Loops over all input elements and ensure that they get an .focus class
      * added upon focus and remove it when it loses focus. This is a workaround
      * for IE7's lack of :hover support.
@@ -445,8 +434,8 @@ var UI = function() {
         $(this).removeClass('focus');
       });
     },
-    
-    
+
+
     /* Adds a control to the window.
      */
     add_control : function(properties) {
@@ -481,8 +470,8 @@ var UI = function() {
         return false;
       }
     },
-    
-    
+
+
     /* Adds a button.
      */
     add_button : function(properties) {
@@ -493,8 +482,8 @@ var UI = function() {
       $control.appendTo( $parent );
       UI.update_properties( $control, properties );
     },
-    
-    
+
+
     /* Adds a checkbox.
      */
     add_checkbox : function( properties ) {
@@ -513,8 +502,8 @@ var UI = function() {
       $control.appendTo( $parent );
       UI.update_properties( $control, properties );
     },
-    
-    
+
+
     /* Adds a container.
      */
     add_container : function(properties) {
@@ -523,8 +512,8 @@ var UI = function() {
       $control.appendTo( $parent );
       UI.update_properties( $control, properties );
     },
-    
-    
+
+
     /* Adds a container.
      */
     add_groupbox : function( properties ) {
@@ -536,8 +525,8 @@ var UI = function() {
       $control.appendTo( $parent );
       UI.update_properties( $control, properties );
     },
-    
-    
+
+
     /* Adds a button.
      */
     add_textbox : function( properties ) {
@@ -561,8 +550,8 @@ var UI = function() {
       $control.appendTo( $parent );
       UI.update_properties( $control, properties );
     },
-    
-    
+
+
     /* Adds a label.
      */
     add_label : function(properties) {
@@ -575,8 +564,8 @@ var UI = function() {
       $control.appendTo( $parent );
       UI.update_properties( $control, properties );
     },
-    
-    
+
+
     /* Adds a toolbar button.
      */
     add_toolbar_button : function(properties) {
@@ -597,8 +586,8 @@ var UI = function() {
       $control.appendTo( $parent );
       UI.update_properties( $control, properties );
     },
-    
-    
+
+
     /* Adds a list.
      */
     add_list : function(properties) {
@@ -627,8 +616,8 @@ var UI = function() {
       $list.appendTo( $parent );
       UI.update_properties( $list, properties );
     },
-    
-    
+
+
     /* Adds a list.
      */
     add_list_item : function(ui_id, items) {
@@ -648,8 +637,8 @@ var UI = function() {
       }
       return true;
     },
-    
-    
+
+
     add_event : function( eventname, $control, $child ) {
       control = $child || $control
       control.on( eventname, function( event ) {
@@ -684,7 +673,7 @@ var UI = function() {
         return true;
       } );
     },
-    
+
     /* Removes a control from the window.
      */
     remove_control : function( control ) {
@@ -695,9 +684,9 @@ var UI = function() {
 
     /* Adds a control to the window.
      */
-    update_properties : function( control, properties ) {  
+    update_properties : function( control, properties ) {
       var $control = get_object( control );
-      
+
       // Common properties
       for ( property in properties ) {
         //alert(property);
@@ -748,7 +737,7 @@ var UI = function() {
           break;
         }
       }
-      
+
       switch ( properties.type )
       {
       case 'Button':
@@ -770,25 +759,25 @@ var UI = function() {
         update_listbox_properties( $control, properties );
         break;
       }
-      
+
       return true;
     }
-    
-    
+
+
   };
-  
+
   /* PRIVATE */
-  
+
   function control_left_button_down() {
     $(this).addClass('pressed');
     return false;
   }
-  
+
   function control_left_button_up() {
     $(this).removeClass('pressed');
     return false;
   }
-  
+
   /* Returns the parent object.
    */
   function get_parent(properties) {
@@ -799,7 +788,7 @@ var UI = function() {
       return $( 'body' );
     }
   }
-  
+
   function get_object( id_or_object ) {
     if ( $.type( id_or_object ) == 'string' ) {
       return $( '#' + id_or_object );
@@ -808,7 +797,7 @@ var UI = function() {
       return id_or_object;
     }
   }
-  
+
   function update_button_properties( $control, properties ) {
     for ( property in properties ) {
       value = properties[property];
@@ -826,7 +815,7 @@ var UI = function() {
     }
     return true;
   }
-  
+
   function update_checkbox_properties( $control, properties ) {
     $label = $control.children('span');
     $checkbox = $control.children('input');
@@ -844,7 +833,7 @@ var UI = function() {
     }
     return true;
   }
-  
+
   function update_groupbox_properties( $control, properties ) {
     $label = $control.children('legend');
     for ( property in properties ) {
@@ -858,7 +847,7 @@ var UI = function() {
     }
     return true;
   }
-  
+
   function update_label_properties( $control, properties ) {
     for ( property in properties ) {
       value = properties[property];
@@ -874,7 +863,7 @@ var UI = function() {
     }
     return true;
   }
-  
+
   function update_label_text( $control, properties ) {
     var caption = properties['caption'];
     if ( 'url' in properties ) {
@@ -889,7 +878,7 @@ var UI = function() {
     }
     return true;
   }
-  
+
   function update_textbox_properties( $control, properties ) {
     for ( property in properties ) {
       value = properties[property];
@@ -902,7 +891,7 @@ var UI = function() {
     }
     return true;
   }
-  
+
   function update_listbox_properties( $control, properties ) {
     for ( property in properties ) {
       value = properties[property];
@@ -915,7 +904,7 @@ var UI = function() {
     }
     return true;
   }
-  
+
 }(); // UI
 
 
@@ -968,11 +957,11 @@ function naturalSort(a, b) {
     oFxNcL = !(xN[cLoc] || '').match(ore) && parseFloat(xN[cLoc]) || xN[cLoc] || 0;
     oFyNcL = !(yN[cLoc] || '').match(ore) && parseFloat(yN[cLoc]) || yN[cLoc] || 0;
     // handle numeric vs string comparison - number < string - (Kyle Adams)
-    if (isNaN(oFxNcL) !== isNaN(oFyNcL)) return (isNaN(oFxNcL)) ? 1 : -1; 
+    if (isNaN(oFxNcL) !== isNaN(oFyNcL)) return (isNaN(oFxNcL)) ? 1 : -1;
     // rely on string comparison if different types - i.e. '02' < 2 != '02' < '2'
     else if (typeof oFxNcL !== typeof oFyNcL) {
-      oFxNcL += ''; 
-      oFyNcL += ''; 
+      oFxNcL += '';
+      oFyNcL += '';
     }
     if (oFxNcL < oFyNcL) return -1;
     if (oFxNcL > oFyNcL) return 1;

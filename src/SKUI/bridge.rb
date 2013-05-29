@@ -99,5 +99,22 @@ module SKUI
       nil
     end
 
+    # @param [String] ui_id ID to a +Control.ui_id+
+    #
+    # @return [String] Returns the checked state for the given Control.ui_id.
+    # @since 1.0.0
+    def get_checkbox_state( ui_id )
+      call( 'Bridge.get_checkbox_state', ui_id )
+    end
+
+    # @param [String] ui_id ID to a +Control.ui_id+
+    #
+    # @return [String] Returns the value for the given Control.ui_id.
+    # @since 1.0.0
+    def get_element_value( ui_id )
+      # This method is just syntax sugar.
+      @webdialog.get_element_value( ui_id )
+    end
+
   end # class
 end # module
