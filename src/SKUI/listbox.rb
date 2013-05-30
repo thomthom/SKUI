@@ -16,10 +16,14 @@ module SKUI
     # @param [Proc] on_click
     #
     # @since 1.0.0
-    def initialize( list )
+    def initialize( list = [] )
+      unless list.is_a?( Array )
+        raise( ArgumentError, 'Not an array.' )
+      end
+      # (?) Check for String content? Convert to strings? Accept #to_a objects?
       super()
        # (?) Should the :items list be a Hash instead? To allow key/value pairs.
-      @properties[ :items ] = ( list.is_a?(Array) ) ? list : []
+      @properties[ :items ] = list
       @properties[ :multiple ] = false
     end
 
