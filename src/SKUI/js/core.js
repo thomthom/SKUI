@@ -474,13 +474,13 @@ var UI = function() {
 
     /* Adds a button.
      */
-    add_button : function(properties) {
+    add_button : function( properties ) {
       var $parent = get_parent( properties );
       var $control = $('<button></button>');
+      UI.update_properties( $control, properties );
       $control.text( properties.caption );
       UI.add_event( 'click', $control );
       $control.appendTo( $parent );
-      UI.update_properties( $control, properties );
     },
 
 
@@ -494,23 +494,23 @@ var UI = function() {
       $checkbox.appendTo( $control );
       $label.appendTo( $control );
       // Set properties
+      UI.update_properties( $control, properties );
       $checkbox.prop( 'checked', properties.checked );
       $label.text( properties.value );
       //UI.add_event( 'click', $control ); // (!) Block 'change' event on OSX.
       UI.add_event( 'change', $control, $checkbox );
       // Add to document
       $control.appendTo( $parent );
-      UI.update_properties( $control, properties );
     },
 
 
     /* Adds a container.
      */
-    add_container : function(properties) {
+    add_container : function( properties ) {
       var $parent = get_parent( properties );
-      var $control = $('<div class="container"></div>');
-      $control.appendTo( $parent );
+      var $control = $('<div class="container" />');
       UI.update_properties( $control, properties );
+      $control.appendTo( $parent );
     },
 
 
@@ -518,12 +518,12 @@ var UI = function() {
      */
     add_groupbox : function( properties ) {
       var $parent = get_parent( properties );
-      var $control = $('<fieldset/>');
+      var $control = $('<fieldset class="container" />');
       var $label = $('<legend/>');
       $label.appendTo( $control );
+      UI.update_properties( $control, properties );
       $label.text( properties.label );
       $control.appendTo( $parent );
-      UI.update_properties( $control, properties );
     },
 
 
@@ -536,6 +536,7 @@ var UI = function() {
       } else {
         var $control = $('<input type="text" />');
       }
+      UI.update_properties( $control, properties );
       $control.val( properties.value );
       UI.add_event( 'change', $control );
       UI.add_event( 'keydown', $control );
@@ -548,7 +549,6 @@ var UI = function() {
       UI.add_event( 'paste', $control );
       UI.add_event( 'textchange', $control );
       $control.appendTo( $parent );
-      UI.update_properties( $control, properties );
     },
 
 
@@ -557,12 +557,12 @@ var UI = function() {
     add_label : function(properties) {
       var $parent = get_parent( properties );
       var $control = $('<label/>');
+      UI.update_properties( $control, properties );
       $control.text( properties.caption );
       if ( 'control' in properties ) {
         $control.attr( 'for', properties.control );
       }
       $control.appendTo( $parent );
-      UI.update_properties( $control, properties );
     },
 
 
@@ -571,6 +571,7 @@ var UI = function() {
     add_toolbar_button : function(properties) {
       var $parent = get_parent( properties );
       var $control = $('<div class="toolbarbutton"></div>');
+      UI.update_properties( $control, properties );
       if ( 'icon' in properties )
       {
         $control.attr( 'title', properties.caption );
@@ -584,7 +585,6 @@ var UI = function() {
       }
       UI.add_event( 'click', $control );
       $control.appendTo( $parent );
-      UI.update_properties( $control, properties );
     },
 
 
@@ -593,6 +593,7 @@ var UI = function() {
     add_list : function(properties) {
       var $parent = get_parent( properties );
       var $list = $('<select/>')
+      UI.update_properties( $list, properties );
       if ( 'size' in properties ) {
         $list.attr( 'size', properties.size )
       }
@@ -614,7 +615,6 @@ var UI = function() {
         Sketchup.callback( $list.attr( 'id' ), 'change', args );
       } );
       $list.appendTo( $parent );
-      UI.update_properties( $list, properties );
     },
 
 
