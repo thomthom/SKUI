@@ -1,13 +1,10 @@
 module SKUI
   # @abstract +Container+ and +Window+ implements this.
   # @since 1.0.0
-  module ContainerControl
+  module ControlManager
   
     # @since 1.0.0
     attr( :controls )
-
-    # @since 1.0.0
-    attr_accessor( :parent, :window )
     
     # @since 1.0.0
     def initialize
@@ -45,8 +42,8 @@ module SKUI
     def find_control_by_ui_id( ui_id )
       for control in @controls
         return control if control.ui_id == ui_id
-        if control.is_a?( ContainerControl )
-          result = control.find_control_by_id( ui_id )
+        if control.is_a?( ControlManager )
+          result = control.find_control_by_ui_id( ui_id )
           return result if result
         end
       end
@@ -60,7 +57,7 @@ module SKUI
     def find_control_by_name( name )
       for control in @controls
         return control if control.name == name
-        if control.is_a?( ContainerControl )
+        if control.is_a?( ControlManager )
           result = control.find_control_by_name( name )
           return result if result
         end

@@ -71,8 +71,8 @@ module SKUI
     # @return [Boolean]
     # @since 1.0.0
     def trigger_event( event, *args )
-      Debug.puts( "#{self.class}.trigger_event(#{event.to_s})" )
-      Debug.puts( args.inspect )
+      #Debug.puts( "#{self.class}.trigger_event(#{event.to_s})" )
+      #Debug.puts( args.inspect )
       if @events.key?( event )
         @events[event].each { |proc|
           # Add self to argument list so the called event can get the handle for

@@ -1,4 +1,9 @@
 module SKUI
+
+  require File.join( PATH, 'control.rb' )
+  require File.join( PATH, 'window.rb' )
+
+
   # Sortable Hash that preserves the insertion order.
   # When converted to strings it output a JavaScript JSON string that can be
   # used in WebDialogs for instance.
@@ -158,6 +163,10 @@ module SKUI
         "new Point3d( #{object.to_a.join(', ')} )"
       elsif object.is_a?( Geom::Vector3d )
         "new Vector3d( #{object.to_a.join(', ')} )"
+      elsif object.is_a?( Control )
+        object.ui_id.inspect
+      elsif object.is_a?( Window )
+        'Window'.inspect
       else
         # String, Integer, Float, TrueClass, FalseClass.
         # (!) Filter out accepted objects.

@@ -782,10 +782,14 @@ var UI = function() {
    */
   function get_parent(properties) {
     if ( 'parent' in properties ) {
-      return $( '#' + properties.parent );
+      if ( properties.parent == 'Window' ) {
+        return $( 'body' );
+      }
+      else {
+        return $( '#' + properties.parent );
+      }
     }
     else {
-      return $( 'body' );
     }
   }
 

@@ -19,9 +19,14 @@ module SKUI
 
 
   # Load the availible UI control classes.
-  require File.join( PATH, 'debug.rb' )
-  require File.join( PATH, 'control.rb' )
   require File.join( PATH, 'button.rb' )
+  require File.join( PATH, 'checkbox.rb' )
+  require File.join( PATH, 'container.rb' )
+  require File.join( PATH, 'groupbox.rb' )
+  require File.join( PATH, 'label.rb' )
+  require File.join( PATH, 'listbox.rb' )
+  require File.join( PATH, 'textbox.rb' )
+  require File.join( PATH, 'toolbar_button.rb' )
   require File.join( PATH, 'window.rb' )
 
 end # module

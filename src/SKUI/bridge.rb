@@ -1,7 +1,7 @@
 module SKUI
 
-  require File.join( PATH, 'container_control.rb' )
   require File.join( PATH, 'control.rb' )
+  require File.join( PATH, 'control_manager.rb' )
   require File.join( PATH, 'json.rb' )
 
   
@@ -84,7 +84,7 @@ module SKUI
       nil
     end
 
-    # @param [ContainerControl] container
+    # @param [ControlManager] container
     #
     # @return [Nil]
     # @since 1.0.0
@@ -92,7 +92,7 @@ module SKUI
       # (?) Compile into one large function call, might it be faster to execute?
       for control in container.controls
         add_control( control )
-        if control.is_a?( ContainerControl )
+        if control.is_a?( ControlManager )
           add_container( control )
         end
       end

@@ -1,6 +1,7 @@
 module SKUI
 
   require File.join( PATH, 'control.rb' )
+  require File.join( PATH, 'control_manager.rb' )
 
 
   # Container control grouping child controls.
@@ -8,7 +9,7 @@ module SKUI
   # @since 1.0.0
   class Container < Control
 
-    include ContainerElement
+    include ControlManager
 
     # (!) Background color. (Style)
 

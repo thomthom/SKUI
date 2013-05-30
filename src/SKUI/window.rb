@@ -1,18 +1,17 @@
 module SKUI
 
+  require File.join( PATH, 'base.rb' )
   require File.join( PATH, 'bridge.rb' )
-  require File.join( PATH, 'container_control.rb' )
+  require File.join( PATH, 'control_manager.rb' )
   require File.join( PATH, 'debug.rb' )
-  require File.join( PATH, 'events.rb' )
 
 
   # Basic window class. Use this as the foundation for custom window types.
   #
   # @since 1.0.0
-  class Window
+  class Window < Base
 
-    include Events
-    include ContainerControl
+    include ControlManager
 
     # @since 1.0.0
     define_event( :ready )
@@ -225,8 +224,8 @@ module SKUI
     # @return [Nil]
     # @since 1.0.0
     def event_callback( webdialog, params )
-      Debug.puts( '>> Event Callback' )
-      Debug.puts( params )
+      #Debug.puts( '>> Event Callback' )
+      #Debug.puts( params )
       ui_id, event_str, args_str = params.split('||')
       event = event_str.intern
       # Catch Debug Console callbacks
