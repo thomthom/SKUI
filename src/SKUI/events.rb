@@ -50,6 +50,7 @@ module SKUI
       @events[event] << block
       nil
     end
+    alias :on :add_event_handler
 
     # Detaches all event handlers. Useful when one want to allow the objects to
     # be garbage collected.
