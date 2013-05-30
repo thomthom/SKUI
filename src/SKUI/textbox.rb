@@ -20,7 +20,7 @@ module SKUI
     # @param [String] value
     #
     # @since 1.0.0
-    def initialize( value )
+    def initialize( value = '' )
       super()
       @properties[ :value ] = value
     end
