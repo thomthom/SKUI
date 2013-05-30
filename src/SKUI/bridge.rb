@@ -99,12 +99,28 @@ module SKUI
       nil
     end
 
-    # @param [String] ui_id ID to a +Control.ui_id+
+    # @param [String] selector jQuery selector
+    #
+    # @return [String] Returns the HTML code for the given jQuery selector.
+    # @since 1.0.0
+    def get_html( selector )
+      call( 'Bridge.get_html', selector )
+    end
+
+    # @param [String] ui_id ID to a +Checkbox+ control.
     #
     # @return [String] Returns the checked state for the given Control.ui_id.
     # @since 1.0.0
     def get_checkbox_state( ui_id )
       call( 'Bridge.get_checkbox_state', ui_id )
+    end
+
+    # @param [String] selector jQuery selector
+    #
+    # @return [String] Returns the checked state for the given jQuery selector.
+    # @since 1.0.0
+    def get_checked_state( selector )
+      call( 'Bridge.get_checked_state', selector )
     end
 
     # @param [String] ui_id ID to a +Control.ui_id+
@@ -114,6 +130,14 @@ module SKUI
     def get_element_value( ui_id )
       # This method is just syntax sugar.
       @webdialog.get_element_value( ui_id )
+    end
+    
+    # @param [String] selector jQuery selector
+    #
+    # @return [String] Returns the text content for the given jQuery selector.
+    # @since 1.0.0
+    def get_text( selector )
+      call( 'Bridge.get_text', selector )
     end
 
   end # class
