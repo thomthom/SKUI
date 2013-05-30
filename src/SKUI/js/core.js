@@ -174,7 +174,7 @@ if ( true ) {
       /* Relay events back to the webdialog.
        */
       log : function( string ) {
-        Sketchup.callback( 'Console', 'log', string );
+        Sketchup.callback( 'Console', 'log', [string] );
       }
 
 
