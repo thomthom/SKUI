@@ -379,15 +379,15 @@ var UI = function() {
       bridge = $('<input id="SKUI_RUBY_BRIDGE" name="SKUI_RUBY_BRIDGE" type="hidden" />');
       $('body').append( bridge );
       // Focus property
-      UI.add_focus_property();
+      UI.add_focus_property(); // (?) Needed? Gives IE7 support, but...
       // URL Links
       UI.redirect_links();
       // Buttons
-      $('.button').live('mousedown', control_left_button_down );
-      $('.button').live('mouseup', control_left_button_up );
+      $('button').live('mousedown', control_left_button_down ); // (?) Needed?
+      $('button').live('mouseup', control_left_button_up ); // (?)
       // ToolbarButtons
-      $('.toolbarbutton').live('mousedown', control_left_button_down );
-      $('.toolbarbutton').live('mouseup', control_left_button_up );
+      $('.toolbarbutton').live('mousedown', control_left_button_down ); // (?)
+      $('.toolbarbutton').live('mouseup', control_left_button_up ); // (?)
       // Disable native browser functions to make the dialog appear more native.
       UI.disable_select();
       UI.disable_context_menu();
