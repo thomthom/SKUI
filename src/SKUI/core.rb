@@ -29,4 +29,19 @@ module SKUI
   require File.join( PATH, 'toolbar_button.rb' )
   require File.join( PATH, 'window.rb' )
 
+
+  # @return [Integer] Number of files reloaded.
+  # @since 1.0.0
+  def self.reload
+    original_verbose = $VERBOSE
+    $VERBOSE = nil
+    filter = File.join( PATH, '*.{rb,rbs}' )
+    x = Dir.glob( filter ).each { |file|
+      load file
+    }
+    x.length
+  ensure
+    $VERBOSE = original_verbose
+  end
+
 end # module
