@@ -1,7 +1,14 @@
 module SKUI
 
-  require File.join( PATH, 'control.rb' )
-  require File.join( PATH, 'window.rb' )
+  # (i) These requires caused loading problems as the Window class was evaluated
+  #     without Base having been able to load Events.
+  #
+  #     And they where only included in the first place as the #object_to_js
+  #     are able to process the Control and Window classes - which isn't
+  #     for anything else. And if the method received such an object type it
+  #     means that the class already loaded so it doesn't need to require it.
+  #require File.join( PATH, 'control.rb' )
+  #require File.join( PATH, 'window.rb' )
 
 
   # Sortable Hash that preserves the insertion order.
