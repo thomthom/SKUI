@@ -107,12 +107,6 @@ module SKUI
       @webdialog.close
     end
 
-    # @return [String]
-    # @since 1.0.0
-    def inspect
-      "<#{self.class}:#{object_id_hex()}>"
-    end
-
     # @overload set_position( left, top )
     #   @param [Numeric] left
     #   @param [Numeric] top
@@ -324,12 +318,6 @@ module SKUI
       html_file = File.join( PATH_HTML, 'window.html' )
       webdialog.set_file( html_file )
       webdialog
-    end
-
-    # @return [String]
-    # @since 1.0.0
-    def object_id_hex
-      "0x%x" % ( self.object_id << 1 )
     end
 
   end # class
