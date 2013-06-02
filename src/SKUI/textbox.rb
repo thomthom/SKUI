@@ -28,7 +28,7 @@ module SKUI
     # @return [String]
     # @since 1.0.0
     def value
-      value = window.bridge.get_element_value( ui_id )
+      value = window.bridge.get_control_value( ui_id )
     end
 
   end # class

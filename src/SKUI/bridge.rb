@@ -122,15 +122,6 @@ module SKUI
     def get_checked_state( selector )
       call( 'Bridge.get_checked_state', selector )
     end
-
-    # @param [String] ui_id ID to a +Control.ui_id+
-    #
-    # @return [String] Returns the value for the given Control.ui_id.
-    # @since 1.0.0
-    def get_element_value( ui_id )
-      # This method is just syntax sugar.
-      @webdialog.get_element_value( ui_id )
-    end
     
     # @param [String] selector jQuery selector
     #
@@ -139,6 +130,26 @@ module SKUI
     def get_text( selector )
       call( 'Bridge.get_text', selector )
     end
+
+    # It appear that under OSX UI::WebDialog.get_element_value doesn't work for
+    # <TEXTAREA> and <SELECT> elements. Using this instead solves the issue.
+    #
+    # @param [String] selector jQuery selector
+    #
+    # @return [String] Returns the value for the given jQuery selector.
+    # @since 1.0.0
+    def get_value( selector )
+      call( 'Bridge.get_value', selector )
+    end
+
+    # @param [String] ui_id Control.ui_id
+    #
+    # @return [String] Returns the value for the given Control.
+    # @since 1.0.0
+    def get_control_value( ui_id )
+      get_value( "##{ui_id}" )
+    end
+    alias :get_element_value :get_control_value
 
   end # class
 end # module

@@ -307,6 +307,13 @@ var Bridge = function() {
     },
 
 
+    /* Returns the value for the given jQuery selector.
+     */
+    get_value : function( selector ) {
+      return $(selector).val();
+    },
+
+
     /* Process the next message in the queue to Ruby.
      */
     push_message : function() {
