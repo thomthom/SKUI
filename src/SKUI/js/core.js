@@ -295,14 +295,14 @@ var Bridge = function() {
 
     /* Returns the HTML for the given jQuery selector.
      */
-    get_html : function(selector) {
+    get_html : function( selector ) {
       return $(selector).html();
     },
 
 
     /* Returns the text for the given jQuery selector.
      */
-    get_text : function(selector) {
+    get_text : function( selector ) {
       return $(selector).text();
     },
 
