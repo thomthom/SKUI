@@ -201,9 +201,9 @@ module SKUI
     # @since 1.0.0
     def event_window_ready( webdialog, params )
       Debug.puts( '>> Dialog Ready' )
-      self.bridge.add_container( self )
+      bridge.add_container( self )
       # (!) Inject theme CSS.
-      self.trigger_event( :ready )
+      trigger_event( :ready )
       nil
     end
     
@@ -225,7 +225,7 @@ module SKUI
       # Catch Debug Console callbacks
       return Debug.puts( args_str ) if ui_id == 'Console'
       # Process Control
-      control = self.find_control_by_ui_id( ui_id )
+      control = find_control_by_ui_id( ui_id )
       if control
         if args_str
           args = args_str.split(',')
