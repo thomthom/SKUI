@@ -76,7 +76,7 @@ var Sketchup = function() {
       else {
         params = controlID+'||'+event+'||'+args.join(',');
       }
-      window.location = 'skp:SKUI_Event_Callback@'+params;
+      Bridge.queue_message( params )
     },
 
     /* Returns the hosting SketchUp version from the user agent string.
@@ -235,6 +235,14 @@ var WebDialog = function() {
 
 
 var Bridge = function() {
+
+  /* Due to OSX' async callback nature the messages needs to be queued up and
+   * carefully sent in sequence. The next message cannot be sent until a message
+   * from Ruby confirms the last message was received.
+   */
+  var messages = [];
+  var busy = false;
+
   return {
 
 
@@ -296,6 +304,42 @@ var Bridge = function() {
      */
     get_text : function(selector) {
       return $(selector).text();
+    },
+
+
+    /* Process the next message in the queue to Ruby.
+     */
+    push_message : function() {
+      if ( busy ) {
+        return false;
+      } else {
+        message = messages.shift();
+        if ( message ) {
+          busy = true;
+          window.location = 'skp:SKUI_Event_Callback@' + message;
+          return true;
+        } else {
+          return false;
+        }
+      }
+    },
+
+
+    /* Ruby calls this when a message has been received which means the next
+     * message can be sent.
+     */
+    pump_message : function() {
+      busy = false;
+      Bridge.push_message();
+      return busy;
+    },
+
+
+    /* Send the next message in the queue to Ruby.
+     */
+    queue_message : function( message ) {
+      messages.push( message );
+      return Bridge.push_message();
     },
 
 

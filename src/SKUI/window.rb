@@ -240,6 +240,10 @@ module SKUI
           control.trigger_event( event )
         end
       end
+    ensure
+      # Inform the Webdialog the message was received so it can process any
+      # remaining messages.
+      bridge.call( 'Bridge.pump_message' )
       nil
     end
 
