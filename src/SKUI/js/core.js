@@ -23,7 +23,7 @@ function Point3d( x, y, z ) {
 Point3d.prototype.toString = function()
 {
   // (!) Format numbers
-	return 'Point3d(' + this.x + ', ' + this.y + ', ' + this.z + ')';
+  return 'Point3d(' + this.x + ', ' + this.y + ', ' + this.z + ')';
 }
 
 
@@ -35,7 +35,7 @@ function Vector3d( x, y, z ) {
 Vector3d.prototype.toString = function()
 {
   // (!) Format numbers
-	return 'Vector3d(' + this.x + ', ' + this.y + ', ' + this.z + ')';
+  return 'Vector3d(' + this.x + ', ' + this.y + ', ' + this.z + ')';
 }
 
 
@@ -47,7 +47,7 @@ function Color( r, g, b, a ) {
 }
 Color.prototype.toString = function()
 {
-	return 'Color(' + this.r + ', ' + this.g + ', ' + this.b + ', ' + this.a + ')';
+  return 'Color(' + this.r + ', ' + this.g + ', ' + this.b + ', ' + this.a + ')';
 }
 
 
@@ -1016,7 +1016,7 @@ function naturalSort(a, b) {
   // natural sorting of hex or dates - prevent '1.2.3' valid date
   if ( y.indexOf('.') < 0 && yD )
     if ( xD < yD ) return -1;
-    else if ( xD > yD )	return 1;
+    else if ( xD > yD ) return 1;
   // natural sorting through split numeric strings and default strings
   for(var cLoc=0, numS=Math.max(xN.length, yN.length); cLoc < numS; cLoc++) {
     // find floats not starting with '0', string or 0 if not defined (Clint Priest)
