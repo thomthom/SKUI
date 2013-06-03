@@ -787,6 +787,13 @@ var UI = function() {
         case 'font_size':
           $control.css( 'font-size', properties.font_size );
           break;
+        case 'visible':
+          if ( properties.visible ) {
+            $control.css( 'visibility', 'visible' );
+          } else {
+            $control.css( 'visibility', 'hidden' );
+          }
+          break;
         case 'disabled':
           $control.toggleClass( 'disabled', properties.disabled );
           $control.prop( 'readonly', properties.disabled );
