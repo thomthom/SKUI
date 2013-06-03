@@ -7,7 +7,9 @@ module SKUI
   class Listbox < Control
 
     # @since 1.0.0
-    prop_reader( :items, :multiple, :size )
+    prop_reader( :items )
+    
+    prop( :multiple, :size )
 
     # @since 1.0.0
     define_event( :change )
