@@ -26,7 +26,6 @@ module SKUI
   require File.join( PATH, 'label.rb' )
   require File.join( PATH, 'listbox.rb' )
   require File.join( PATH, 'textbox.rb' )
-  require File.join( PATH, 'toolbar_button.rb' )
   require File.join( PATH, 'window.rb' )
 
 

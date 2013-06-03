@@ -447,9 +447,6 @@ var UI = function() {
       // Buttons
       $('button').live('mousedown', control_left_button_down ); // (?) Needed?
       $('button').live('mouseup', control_left_button_up ); // (?)
-      // ToolbarButtons
-      $('.toolbarbutton').live('mousedown', control_left_button_down ); // (?)
-      $('.toolbarbutton').live('mouseup', control_left_button_up ); // (?)
       // Disable native browser functions to make the dialog appear more native.
       UI.disable_select();
       UI.disable_context_menu();
@@ -523,9 +520,6 @@ var UI = function() {
         return true;
       case 'Textbox':
         UI.add_textbox( properties );
-        return true;
-      case 'ToolbarButton':
-        UI.add_toolbar_button( properties );
         return true;
       default:
         alert( 'Invalid Control Type: ' + properties.type );
@@ -624,28 +618,6 @@ var UI = function() {
       if ( 'control' in properties ) {
         $control.attr( 'for', properties.control );
       }
-      $control.appendTo( $parent );
-    },
-
-
-    /* Adds a toolbar button.
-     */
-    add_toolbar_button : function(properties) {
-      var $parent = get_parent( properties );
-      var $control = $('<div class="toolbarbutton"></div>');
-      UI.update_properties( $control, properties );
-      if ( 'icon' in properties )
-      {
-        $control.attr( 'title', properties.caption );
-        var $icon = $('<img />').appendTo( $control );
-        $icon.attr('src', properties.icon);
-        $icon.attr('alt', 'N/A');
-      }
-      else
-      {
-        $control.text( properties.caption );
-      }
-      UI.add_event( 'click', $control );
       $control.appendTo( $parent );
     },
 
