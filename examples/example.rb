@@ -46,7 +46,7 @@ btn_hello.right = 10
 btn_hello.bottom = 10
 group.add_control( btn_hello )
 
-group2 = SKUI::Groupbox.new( 'Groupbox2' )
+group2 = SKUI::Groupbox.new( 'Multiline Text and List' )
 group2.position( 5, 110 )
 group2.right = 5
 group2.height = 130
@@ -71,11 +71,46 @@ lst_list.on( :change ) { |control, value|
 }
 group2.add_control( lst_list )
 
-container = SKUI::Groupbox.new( 'Option Groups' )
-container.position( 5, 245 )
-container.right = 5
-container.height = 100
-window.add_control( container )
+group3 = SKUI::Groupbox.new( 'Option Groups' )
+group3.position( 5, 245 )
+group3.right = 5
+group3.height = 100
+window.add_control( group3 )
+
+r1 = SKUI::RadioButton.new( 'Foo' )
+r1.position( 10, 20 )
+r1.on( :change ) { |control|
+  puts "RadioButton.change - #{control}"
+  puts "> Siblings: #{control.siblings.inspect}"
+  puts "> Selected: #{control.checked_sibling.inspect}"
+}
+group3.add_control( r1 )
+
+r2 = SKUI::RadioButton.new( 'Bar' )
+r2.position( 10, 40 )
+group3.add_control( r2 )
+
+r3 = SKUI::RadioButton.new( 'Biz' )
+r3.position( 10, 60 )
+group3.add_control( r3 )
+
+container = SKUI::Container.new
+container.position( 100, 20 )
+container.right = 10
+container.bottom = 5
+group3.add_control( container )
+
+r4 = SKUI::RadioButton.new( 'Lorem', true )
+r4.position( 10, 0 )
+container.add_control( r4 )
+
+r5 = SKUI::RadioButton.new( 'Ipsum' )
+r5.position( 10, 20 )
+container.add_control( r5 )
+
+r6 = SKUI::RadioButton.new( 'Dolor' )
+r6.position( 10, 40 )
+container.add_control( r6 )
 
 btn_test = SKUI::Button.new( 'Test' ) { |control|
   puts 'Testing...'

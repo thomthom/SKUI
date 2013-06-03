@@ -447,6 +447,8 @@ var UI = function() {
       // Buttons
       $('button').live('mousedown', control_left_button_down ); // (?) Needed?
       $('button').live('mouseup', control_left_button_up ); // (?)
+      // RadioButtons
+      UI.init_radiobuttons_toggle();
       // Disable native browser functions to make the dialog appear more native.
       UI.disable_select();
       UI.disable_context_menu();
@@ -495,6 +497,19 @@ var UI = function() {
     },
 
 
+    /* When a radiobutton is toggled the other radiobuttons should be unchecked.
+     */
+    init_radiobuttons_toggle : function() {
+      $(document).on('change', 'input[type=radio]', function () {
+        if ( $(this).prop('checked') == true ) {
+          $control = $(this).parent();
+          $radiobuttons = $control.siblings('.radiobutton').children('input');
+          $radiobuttons.prop('checked', false);
+        }
+      });
+    },
+
+
     /* Adds a control to the window.
      */
     add_control : function(properties) {
@@ -517,6 +532,9 @@ var UI = function() {
         return true;
       case 'Listbox':
         UI.add_list( properties );
+        return true;
+      case 'RadioButton':
+        UI.add_radiobutton( properties );
         return true;
       case 'Textbox':
         UI.add_textbox( properties );
@@ -673,6 +691,27 @@ var UI = function() {
     },
 
 
+    /* Adds a radio button.
+     */
+    add_radiobutton : function( properties ) {
+      var $parent = get_parent( properties );
+      var $control = $('<label class="radiobutton" />');
+      var $label = $('<span/>');
+      var $radio = $('<input type="radio" />');
+      $radio.appendTo( $control );
+      $label.appendTo( $control );
+      // Set properties
+      UI.update_properties( $control, properties );
+      $radio.prop( 'checked', properties.checked );
+      $label.text( properties.value );
+      //UI.add_event( 'click', $control ); // (!) Block 'change' event on OSX.
+      UI.add_event( 'change', $control, $radio );
+      // (!) Only one radio button active per container.
+      // Add to document
+      $control.appendTo( $parent );
+    },
+
+
     add_event : function( eventname, $control, $child ) {
       control = $child || $control
       control.on( eventname, function( event ) {
@@ -792,6 +831,9 @@ var UI = function() {
         break;
       case 'Label':
         update_label_properties( $control, properties );
+        break;
+      case 'RadioButton':
+        update_radiobutton_properties( $control, properties );
         break;
       case 'Textbox':
         update_textbox_properties( $control, properties );
@@ -920,6 +962,24 @@ var UI = function() {
       $url.appendTo( $control );
     } else {
       $control.text( caption );
+    }
+    return true;
+  }
+
+  function update_radiobutton_properties( $control, properties ) {
+    $label = $control.children('span');
+    $radio = $control.children('input');
+    for ( property in properties ) {
+      value = properties[property];
+      switch ( property )
+      {
+      case 'checked':
+        $radio.prop( 'checked', value );
+        break;
+      case 'label':
+        $label.text( value );
+        break;
+      }
     }
     return true;
   }

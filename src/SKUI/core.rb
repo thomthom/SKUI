@@ -25,6 +25,7 @@ module SKUI
   require File.join( PATH, 'groupbox.rb' )
   require File.join( PATH, 'label.rb' )
   require File.join( PATH, 'listbox.rb' )
+  require File.join( PATH, 'radiobutton.rb' )
   require File.join( PATH, 'textbox.rb' )
   require File.join( PATH, 'window.rb' )
 
