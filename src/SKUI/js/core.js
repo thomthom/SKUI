@@ -544,7 +544,7 @@ var UI = function() {
      */
     add_checkbox : function( properties ) {
       var $parent = get_parent( properties );
-      var $control = $('<label/>');
+      var $control = $('<label class="checkbox" />');
       var $label = $('<span/>');
       var $checkbox = $('<input type="checkbox" />');
       $checkbox.appendTo( $control );
