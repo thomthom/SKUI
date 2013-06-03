@@ -33,6 +33,7 @@ html
   line-height: 1em;
   color: WindowText;
   background: ThreeDFace;
+  overflow: hidden;
 }
 
 
@@ -59,6 +60,7 @@ html
 .container
 {
   position: relative;
+  overflow: hidden;
 }
 
 
