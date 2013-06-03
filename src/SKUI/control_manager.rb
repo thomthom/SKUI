@@ -29,7 +29,7 @@ module SKUI
       control.window = self.window
       # Add to Webdialog
       if self.window && self.window.visible?
-        self.window.add_control_to_webdialog( control )
+        self.window.bridge.add_control( control )
         return true
       end
       false
