@@ -412,8 +412,14 @@ var Bridge = function() {
           ruby_string = "'<FUNCTION>'";
           break;
         case 'object':
-          // (!) JSON
-          ruby_string = "'<OBJECT>'";
+          // Assume JSON.
+          ruby_hash = new Array();
+          $.each(value, function(k, v) {
+            ruby_key   = Bridge.value_to_ruby( k );
+            ruby_value = Bridge.value_to_ruby( v );
+            ruby_hash.push( ruby_key + " => " + ruby_value );
+          });
+          ruby_string = '{' + ruby_hash.join(',') + '}';
           break;
       }
       return ruby_string;
