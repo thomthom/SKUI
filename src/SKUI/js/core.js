@@ -445,8 +445,8 @@ var UI = function() {
       // URL Links
       UI.redirect_links();
       // Buttons
-      $('button').live('mousedown', control_left_button_down ); // (?) Needed?
-      $('button').live('mouseup', control_left_button_up ); // (?)
+      $(document).on('mousedown', 'button', control_left_button_down ); // (?) Needed?
+      $(document).on('mouseup', 'button', control_left_button_up ); // (?)
       // RadioButtons
       UI.init_radiobuttons_toggle();
       // Disable native browser functions to make the dialog appear more native.
@@ -459,7 +459,7 @@ var UI = function() {
 
     // Ensure links are opened in the default browser.
     redirect_links : function() {
-      $('a.url').live('click', function()
+      $(document).on('click', 'a.url', function()
       {
         window.location = 'skp:SKUI_Open_URL@' + this.href;
         return false;
@@ -488,10 +488,10 @@ var UI = function() {
      * for IE7's lack of :hover support.
      */
     add_focus_property : function() {
-      $('input').live('focusin', function () {
+      $(document).on('focusin', 'input', function () {
         $(this).addClass('focus');
       });
-      $('input').live('focusout', function () {
+      $(document).on('focusout', 'input', function () {
         $(this).removeClass('focus');
       });
     },
@@ -650,7 +650,7 @@ var UI = function() {
         $list.attr( 'size', properties.size )
       }
       if ( 'multiple' in properties && properties.multiple ) {
-        $list.prop( 'multiple', 'multiple' );
+        $list.attr( 'multiple', 'multiple' );
       }
       if ( 'items' in properties ) {
         var items = properties.items;
