@@ -300,6 +300,25 @@ var Bridge = function() {
     },
 
 
+    /* Returns the Rect for the Checkbox control given by UI ID.
+     */
+    get_control_rect : function( ui_id ) {
+      $control = $('#'+ui_id);
+      position = $control.position();
+      width  = $control.outerWidth();
+      height = $control.outerHeight();
+      rect = {
+        'left'   : position.left,
+        'top'    : position.top,
+        'right'  : position.left + width,
+        'bottom' : position.top + height,
+        'width'  : width,
+        'height' : height
+      }
+      return rect;
+    },
+
+
     /* Returns the text for the given jQuery selector.
      */
     get_text : function( selector ) {

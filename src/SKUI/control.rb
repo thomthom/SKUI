@@ -1,6 +1,7 @@
 module SKUI
 
   require File.join( PATH, 'base.rb' )
+  require File.join( PATH, 'rect.rb' )
   require File.join( PATH, 'json.rb' )
 
 
@@ -21,11 +22,14 @@ module SKUI
 
     prop_writer( :font_name, :font_size ) # (!) Needs more work.
 
+    attr_reader( :rect )
+
     # @since 1.0.0
     def initialize
       super()
       @properties[ :ui_id ] = "UI_#{object_id()}"
       @properties[ :type ] = typename()
+      @rect = Rect.new( self )
     end
 
     # Positive `x` value will anchor the control to the left side of the

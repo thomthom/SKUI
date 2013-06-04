@@ -144,6 +144,14 @@ module SKUI
 
     # @param [String] ui_id Control.ui_id
     #
+    # @return [Hash] Returns the Rect for the given Control.
+    # @since 1.0.0
+    def get_control_rect( ui_id )
+      call( 'Bridge.get_control_rect', ui_id )
+    end
+
+    # @param [String] ui_id Control.ui_id
+    #
     # @return [String] Returns the value for the given Control.
     # @since 1.0.0
     def get_control_value( ui_id )
