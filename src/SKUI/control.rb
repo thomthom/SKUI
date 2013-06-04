@@ -28,15 +28,37 @@ module SKUI
       @properties[ :type ] = typename()
     end
 
-    # @param [Numeric] left
-    # @param [Numeric] top
+    # Positive `x` value will anchor the control to the left side of the
+    # container, negative will anchor the control to the right side.
     #
+    # Likewise for y, positive anchors to the top, negative anchors to the
+    # bottom.
+    #
+    # Not that if you have previously set `left` and `right`to stretch the
+    # control within it's parent the stretch will be reset.
+    #
+    # @param [Numeric] x
+    # @param [Numeric] y
+    #
+    # @return [Array<x,y>]
     # @since 1.0.0
-    def position( left, top )
-      @properties[ :left ] = left
-      @properties[ :top ]  = top
-      update_properties( :left, :top )
-      [ left, top ]
+    def position( x, y )
+      if x < 0
+        @properties[ :right ] = x.abs
+        @properties[ :left ] = nil
+      else
+        @properties[ :left ] = x
+        @properties[ :right ] = nil
+      end
+      if y < 0
+        @properties[ :bottom ] = y.abs
+        @properties[ :top ] = nil
+      else
+        @properties[ :top ] = y
+        @properties[ :bottom ] = nil
+      end
+      update_properties( :left, :top, :right, :bottom )
+      [ x, y ]
     end
 
     # Release all references to other objects. Setting them to nil. So that
@@ -62,6 +84,12 @@ module SKUI
       [ width, height ]
     end
 
+    # @param [Numeric] left
+    # @param [Numeric] top
+    # @param [Numeric] right
+    # @param [Numeric] bottom
+    #
+    # @return [Array<left,top,right,bottom>]
     # @since 1.0.0
     def stretch( left, top, right, bottom )
       @properties[ :left ]   = left

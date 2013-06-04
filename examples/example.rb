@@ -29,8 +29,7 @@ group.add_control( lbl_input )
 list = %w{ Hello World Lorem Ipsum }
 lst_dropdown = SKUI::Listbox.new( list )
 lst_dropdown.value = lst_dropdown.items.first
-lst_dropdown.left = 10
-lst_dropdown.bottom = 10
+lst_dropdown.position( 10, -10 )
 lst_dropdown.width = 170
 lst_dropdown.on( :change ) { |control, value| # (?) Second argument needed?
   puts "Dropbox value: #{control.value}"
@@ -42,8 +41,7 @@ btn_hello = SKUI::Button.new( 'Hello' ) { |control|
   puts "Hello #{name}"
   UI.messagebox( "Hello #{name}" )
 }
-btn_hello.right = 10
-btn_hello.bottom = 10
+btn_hello.position( -10, -10 )
 group.add_control( btn_hello )
 
 group2 = SKUI::Groupbox.new( 'Multiline Text and List' )
@@ -95,9 +93,7 @@ r3.position( 10, 60 )
 group3.add_control( r3 )
 
 container = SKUI::Container.new
-container.position( 100, 20 )
-container.right = 10
-container.bottom = 5
+container.stretch( 100, 20, 10, 5 )
 group3.add_control( container )
 
 r4 = SKUI::RadioButton.new( 'Lorem', true )
@@ -115,8 +111,7 @@ container.add_control( r6 )
 btn_test = SKUI::Button.new( 'Test' ) { |control|
   puts 'Testing...'
 }
-btn_test.left = 5
-btn_test.bottom = 5
+btn_test.position( 5, -5 )
 window.add_control( btn_test )
 
 chk_hide = SKUI::Checkbox.new( 'Hide' )
@@ -131,8 +126,7 @@ window.add_control( chk_hide )
 btn_close = SKUI::Button.new( 'Close' ) { |control|
   control.window.close
 }
-btn_close.right = 5
-btn_close.bottom = 5
+btn_close.position( -5, -5 )
 window.add_control( btn_close )
 
 window.show

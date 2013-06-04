@@ -764,39 +764,40 @@ var UI = function() {
       for ( property in properties ) {
         //alert(property);
         value = properties[property];
+        value = ( value === null ) ? '' : value
         //alert(value);
         switch ( property )
         {
         case 'ui_id':
-          $control.attr( 'id', properties.ui_id );
+          $control.attr( 'id', value );
           break;
         case 'top':
           $control.css( 'position', 'absolute' );
-          $control.css( 'top', properties.top );
+          $control.css( 'top', value );
           break;
         case 'left':
           $control.css( 'position', 'absolute' );
-          $control.css( 'left', properties.left );
+          $control.css( 'left', value );
           break;
         case 'bottom':
           $control.css( 'position', 'absolute' );
-          $control.css( 'bottom', properties.bottom );
+          $control.css( 'bottom', value );
           break;
         case 'right':
           $control.css( 'position', 'absolute' );
-          $control.css( 'right', properties.right );
+          $control.css( 'right', value );
           break;
         case 'width':
-          $control.outerWidth( properties.width );
+          $control.outerWidth( value );
           break;
         case 'height':
-          $control.outerHeight( properties.height );
+          $control.outerHeight( value );
           break;
         case 'font_name':
-          $control.css( 'font-family', properties.font_name );
+          $control.css( 'font-family', value );
           break;
         case 'font_size':
-          $control.css( 'font-size', properties.font_size );
+          $control.css( 'font-size', value );
           break;
         case 'visible':
           if ( properties.visible ) {
@@ -806,11 +807,11 @@ var UI = function() {
           }
           break;
         case 'disabled':
-          $control.toggleClass( 'disabled', properties.disabled );
-          $control.prop( 'readonly', properties.disabled );
+          $control.toggleClass( 'disabled', value );
+          $control.prop( 'readonly', value );
           // Disable form controls.
           $form_elements = $control.find( 'input, select, textarea, button' );
-          $form_elements.prop( 'readonly', properties.disabled );
+          $form_elements.prop( 'readonly', value );
           break;
         default:
           /*alert('Invalid Control Property.')*/
