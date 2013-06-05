@@ -250,7 +250,7 @@ var Bridge = function() {
      * (private ?)
      */
     escape_string : function( value ) {
-      return value.replace('\\', '\\\\').replace("'", "\'");
+      return value.replace('\\', '\\\\').replace("'", "\\'");
     },
 
 
