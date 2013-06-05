@@ -5,6 +5,7 @@ module SKUI
     require File.join( PATH, 'events.rb' )
     require File.join( PATH, 'json.rb' )
     require File.join( PATH, 'properties.rb' )
+    require File.join( PATH, 'typecheck.rb' )
 
     include Events
     extend Properties

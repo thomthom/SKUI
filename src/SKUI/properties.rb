@@ -12,9 +12,9 @@ module SKUI
     #
     # @return [Nil]
     # @since 1.0.0
-    def prop( *symbols )
+    def prop( *symbols, &block )
       prop_reader( *symbols )
-      prop_writer( *symbols )
+      prop_writer( *symbols, &block )
       nil
     end
     alias :prop_accessor :prop
@@ -64,15 +64,20 @@ module SKUI
       nil
     end
 
+    # If a block is given it will be evaluated before the property is set. The
+    # block is given one argument, the new value of the property. Use this to
+    # add argument validation to the property.
+    #
     # @param [Symbol] *symbols
     #
     # @return [Nil]
     # @since 1.0.0
-    def prop_writer( *symbols )
+    def prop_writer( *symbols, &block )
       self.class_eval {
         symbols.each { |symbol|
           symbol_set = "#{symbol}=".intern
           define_method( symbol_set ) { |value|
+            value = block.call( value ) if block
             @properties[ symbol ] = value
             update_properties( symbol )
             value
