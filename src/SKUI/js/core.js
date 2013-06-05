@@ -40,6 +40,7 @@ Vector3d.prototype.toString = function()
 
 
 function Color( r, g, b, a ) {
+  a = typeof a !== 'undefined' ? a : 255;
   this.r = r;
   this.g = g;
   this.b = b;
@@ -49,6 +50,19 @@ Color.prototype.toString = function()
 {
   return 'Color(' + this.r + ', ' + this.g + ', ' + this.b + ', ' + this.a + ')';
 }
+Color.prototype.to_css = function()
+{
+  if ( this.a < 255 ) {
+    css_alpha = this.a / 255.0;
+    return 'rgba('+this.r+', '+this.g+', '+this.b+', '+css_alpha+')';
+  } else {
+    return 'rgb('+this.r+', '+this.g+', '+this.b+')';
+  }
+}
+
+
+//String.prototype.to_css = String.prototype.toString; // Doesn't work.
+String.prototype.to_css = function() { return this; }
 
 
 /*******************************************************************************
@@ -425,6 +439,7 @@ var Bridge = function() {
           ruby_string = 'Time.at(' + value.getTime() + ')';
           break;
         case 'regexp':
+          // http://www.w3schools.com/jsref/jsref_obj_regexp.asp
           ruby_string = "'<REGEXP>'";
           break;
         case 'function':
@@ -852,6 +867,9 @@ var UI = function() {
       case 'Checkbox':
         update_checkbox_properties( $control, properties );
         break;
+      case 'Container':
+        update_container_properties( $control, properties );
+        break;
       case 'Groupbox':
         update_groupbox_properties( $control, properties );
         break;
@@ -941,6 +959,22 @@ var UI = function() {
         break;
       case 'label':
         $label.text( value );
+        break;
+      }
+    }
+    return true;
+  }
+
+  function update_container_properties( $control, properties ) {
+    for ( property in properties ) {
+      value = properties[property];
+      switch ( property )
+      {
+      case 'foreground_color':
+        $control.css( 'color', value.to_css() );
+        break;
+      case 'background_color':
+        $control.css( 'background-color', value.to_css() );
         break;
       }
     }

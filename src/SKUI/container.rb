@@ -2,6 +2,7 @@ module SKUI
 
   require File.join( PATH, 'control.rb' )
   require File.join( PATH, 'control_manager.rb' )
+  require File.join( PATH, 'enum_system_color.rb' )
 
 
   # Container control grouping child controls.
@@ -11,7 +12,8 @@ module SKUI
 
     include ControlManager
 
-    # (!) Background color. (Style)
+    prop( :foreground_color, &TypeCheck::COLOR )
+    prop( :background_color, &TypeCheck::COLOR )
 
   end # class
 end # module

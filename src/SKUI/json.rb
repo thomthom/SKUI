@@ -170,6 +170,8 @@ module SKUI
         "new Point3d( #{object.to_a.join(', ')} )"
       elsif object.is_a?( Geom::Vector3d )
         "new Vector3d( #{object.to_a.join(', ')} )"
+      elsif object.is_a?( Sketchup::Color )
+        "new Color( #{object.to_a.join(', ')} )"
       elsif object.is_a?( Control )
         object.ui_id.inspect
       elsif object.is_a?( Window )

@@ -93,6 +93,8 @@ r3.position( 10, 60 )
 group3.add_control( r3 )
 
 container = SKUI::Container.new
+container.foreground_color = SKUI::SystemColor::APP_WORKSPACE
+container.background_color = Sketchup::Color.new( 192, 92, 64, 64 )
 container.stretch( 100, 20, 10, 5 )
 group3.add_control( container )
 
