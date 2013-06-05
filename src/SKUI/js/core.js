@@ -858,14 +858,14 @@ var UI = function() {
       case 'Label':
         update_label_properties( $control, properties );
         break;
+      case 'Listbox':
+        update_listbox_properties( $control, properties );
+        break;
       case 'RadioButton':
         update_radiobutton_properties( $control, properties );
         break;
       case 'Textbox':
         update_textbox_properties( $control, properties );
-        break;
-      case 'Listbox':
-        update_listbox_properties( $control, properties );
         break;
       }
 
@@ -992,6 +992,19 @@ var UI = function() {
     return true;
   }
 
+  function update_listbox_properties( $control, properties ) {
+    for ( property in properties ) {
+      value = properties[property];
+      switch ( property )
+      {
+      case 'value':
+        $control.val( value );
+        break;
+      }
+    }
+    return true;
+  }
+
   function update_radiobutton_properties( $control, properties ) {
     $label = $control.children('span');
     $radio = $control.children('input');
@@ -1011,19 +1024,6 @@ var UI = function() {
   }
 
   function update_textbox_properties( $control, properties ) {
-    for ( property in properties ) {
-      value = properties[property];
-      switch ( property )
-      {
-      case 'value':
-        $control.val( value );
-        break;
-      }
-    }
-    return true;
-  }
-
-  function update_listbox_properties( $control, properties ) {
     for ( property in properties ) {
       value = properties[property];
       switch ( property )
