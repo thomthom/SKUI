@@ -440,7 +440,11 @@ var Bridge = function() {
           break;
         case 'regexp':
           // http://www.w3schools.com/jsref/jsref_obj_regexp.asp
-          ruby_string = "'<REGEXP>'";
+          i = value.ignoreCase ? 'i' : '';
+          g = value.global     ? 'g' : ''; // Not supported in Ruby.
+          m = value.multiline  ? 'm' : '';
+          regex = '/'+value.source+'/'+i+m;
+          ruby_string = Bridge.value_to_ruby( regex );
           break;
         case 'function':
           ruby_string = "'<FUNCTION>'";

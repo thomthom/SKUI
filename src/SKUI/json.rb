@@ -161,6 +161,12 @@ module SKUI
         self.new( object ).to_s( format )
       elsif object.is_a?( Symbol )
         object.inspect.inspect
+      elsif object.is_a?( Regexp )
+        o = object.options
+        i = o & Regexp::EXTENDED == Regexp::EXTENDED ? 'i' : '' # Invalid in JS
+        i = o & Regexp::IGNORECASE == Regexp::IGNORECASE ? 'i' : ''
+        m = o & Regexp::MULTILINE == Regexp::MULTILINE ? 'm' : ''
+        "/#{object.source}/#{i}#{m}"
       elsif object.nil?
         'null'
       elsif object.is_a?( Array )
