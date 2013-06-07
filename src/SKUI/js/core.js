@@ -398,6 +398,14 @@ var Bridge = function() {
     },
 
 
+    /* Sets the ID for the <BODY> element so that the Window class' properties
+     * can control the appearance of the window background.
+     */
+    set_window_id : function( ui_id ) {
+      $('body').attr( 'id', ui_id );
+    },
+
+
     /* Converts Javascript objects into Ruby objects.
      *
      * TODO:

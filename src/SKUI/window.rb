@@ -158,12 +158,6 @@ module SKUI
       @options[:title].dup
     end
 
-    # @return [String]
-    # @since 1.0.0
-    def to_js
-      'Window'.inspect
-    end
-
     # @return [Boolean]
     # @since 1.0.0
     def visible?
@@ -207,6 +201,8 @@ module SKUI
     # @since 1.0.0
     def event_window_ready( webdialog, params )
       Debug.puts( '>> Dialog Ready' )
+      bridge.call( 'Bridge.set_window_id', ui_id )
+      update_properties( *@properties.keys )
       bridge.add_container( self )
       # (!) Inject theme CSS.
       trigger_event( :ready )

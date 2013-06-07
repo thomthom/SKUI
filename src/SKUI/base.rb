@@ -10,6 +10,13 @@ module SKUI
     include Events
     extend Properties
 
+    # ID string used by both Ruby and the WebDialog to keep each control in
+    # sync with each other when passing properties and events.
+    #
+    # @return [String]
+    # @since 1.0.0
+    prop_reader( :ui_id ) # (i) :id would conflict with Object.id
+
     # @return [ControlManager, Nil]
     # @since 1.0.0
     prop( :parent, &TypeCheck::CONTAINER )
@@ -28,12 +35,32 @@ module SKUI
       # @properties contains all the data that must be shared with the webdialog
       # in order to sync everything on both ends.
       @properties = JSON.new
+      @properties[ :ui_id ] = "UI_#{object_id()}"
+      @properties[ :type ] = typename()
     end
 
     # @return [String]
     # @since 1.0.0
     def inspect
       "<#{self.class}:#{object_id_hex}>"
+    end
+
+    # @return [String]
+    # @since 1.0.0
+    def to_js
+      ui_id.inspect
+    end
+
+    # Release all references to other objects. Setting them to nil. So that
+    # the GC can collect them.
+    #
+    # @return [Nil]
+    # @since 1.0.0
+    def release!
+      release_events()
+      @parent = nil
+      @window = nil
+      nil
     end
 
     # @return [String]
@@ -48,6 +75,35 @@ module SKUI
     # @since 1.0.0
     def object_id_hex
       "0x%x" % ( self.object_id << 1 )
+    end
+
+    private
+
+    # Call this method whenever a control property changes, spesifying which
+    # properties changed. This is sent to the WebDialog for syncing.
+    #
+    # @param [Symbol] *properties
+    #
+    # @return [Boolean]
+    # @since 1.0.0
+    def update_properties( *properties )
+      if window && window.visible?
+        # These properties must always be included unmodified.
+        base_properties = {
+          :type => self.typename
+        }
+        # The given properties will be sent to the WebDialog where it updates
+        # the UI to match the state of the Ruby objects.
+        control_properties = JSON.new
+        for property in properties
+          control_properties[ property ] = @properties[ property ]
+        end
+        control_properties.merge!( base_properties )
+        window.bridge.call( 'UI.update_properties', ui_id, control_properties )
+        true
+      else
+        false
+      end
     end
 
   end # class
