@@ -64,7 +64,7 @@ module SKUI
 
     # Returns an array with the width and height of the client area.
     #
-    # @return [Array<Integer,Integer>]
+    # @return [Array(Integer,Integer)]
     # @since 1.0.0
     def client_size
       @bridge.call( 'Webdialog.get_client_size' )
@@ -72,7 +72,7 @@ module SKUI
 
     # Adjusts the window so the client area fits the given +width+ and +height+.
     #
-    # @param [Array<Integer, Integer>] value
+    # @param [Array(Integer,Integer)] value
     #
     # @return [Boolean] Returns false if the size can't be set.
     # @since 2.5.0

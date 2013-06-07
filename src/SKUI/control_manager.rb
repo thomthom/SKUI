@@ -1,5 +1,5 @@
 module SKUI
-  # @abstract +Container+ and +Window+ implements this.
+  # @abstract `Container` and `Window` implements this.
   # @since 1.0.0
   module ControlManager
   
@@ -14,7 +14,7 @@ module SKUI
     
     # @param [Control] control
     #
-    # @return [Boolean] +True+ if the webdialog was open and the control added.
+    # @return [Boolean] `True` if the webdialog was open and the control added.
     # @since 1.0.0
     def add_control( control )
       unless control.is_a?( Control )
@@ -79,7 +79,7 @@ module SKUI
     
     # @param [Control] control
     #
-    # @return [Boolean] +True+ if the webdialog was open and the control removed.
+    # @return [Boolean] `True` if the webdialog was open and the control removed.
     # @since 1.0.0
     def remove_control( control )
       raise( ArgumentError, 'Expected Control' ) unless control.is_a?( Control )

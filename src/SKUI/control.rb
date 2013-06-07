@@ -71,7 +71,7 @@ module SKUI
     # @param [Numeric] x
     # @param [Numeric] y
     #
-    # @return [Array<x,y>]
+    # @return [Array(x,y)]
     # @since 1.0.0
     def position( x, y )
       if x < 0
@@ -120,7 +120,7 @@ module SKUI
     # @param [Numeric] right
     # @param [Numeric] bottom
     #
-    # @return [Array<left,top,right,bottom>]
+    # @return [Array(left,top,right,bottom)]
     # @since 1.0.0
     def stretch( left, top, right, bottom )
       @properties[ :left ]   = left
