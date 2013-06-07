@@ -16,9 +16,10 @@ input, select, textarea
   cursor: auto;
 }
 
-html, input, select, textarea, button
+html, input, select, textarea, button, legend
 {
   font: caption;
+  color: inherit;
 }
 
 html, body
@@ -31,9 +32,16 @@ html, body
 html
 {
   line-height: 1em;
+  overflow: hidden;
+}
+
+body
+{
+  /* (i) If background color was set for HTML the background color for BODY
+   * would not take effect. Not sure why this is. (Tested only in IE10.)
+   */
   color: WindowText;
   background: ThreeDFace;
-  overflow: hidden;
 }
 
 
