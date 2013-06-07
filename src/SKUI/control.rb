@@ -131,6 +131,12 @@ module SKUI
       [ left, top, right, bottom ]
     end
 
+    # @return [String]
+    # @since 1.0.0
+    def to_js
+      ui_id.inspect
+    end
+
     private
 
     # Call this method whenever a control property changes, spesifying which

@@ -1,16 +1,4 @@
 module SKUI
-
-  # (i) These requires caused loading problems as the Window class was evaluated
-  #     without Base having been able to load Events.
-  #
-  #     And they where only included in the first place as the #object_to_js
-  #     are able to process the Control and Window classes - which isn't
-  #     for anything else. And if the method received such an object type it
-  #     means that the class already loaded so it doesn't need to require it.
-  #require File.join( PATH, 'control.rb' )
-  #require File.join( PATH, 'window.rb' )
-
-
   # Sortable Hash that preserves the insertion order.
   # When converted to strings it output a JavaScript JSON string that can be
   # used in WebDialogs for instance.
@@ -178,10 +166,8 @@ module SKUI
         "new Vector3d( #{object.to_a.join(', ')} )"
       elsif object.is_a?( Sketchup::Color )
         "new Color( #{object.to_a.join(', ')} )"
-      elsif object.is_a?( Control )
-        object.ui_id.inspect
-      elsif object.is_a?( Window )
-        'Window'.inspect
+      elsif object.respond_to?( :to_js )
+        object.to_js
       else
         # String, Integer, Float, TrueClass, FalseClass.
         # (!) Filter out accepted objects.

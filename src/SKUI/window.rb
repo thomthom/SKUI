@@ -158,6 +158,12 @@ module SKUI
       @options[:title].dup
     end
 
+    # @return [String]
+    # @since 1.0.0
+    def to_js
+      'Window'.inspect
+    end
+
     # @return [Boolean]
     # @since 1.0.0
     def visible?
