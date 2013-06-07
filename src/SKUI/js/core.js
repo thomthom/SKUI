@@ -857,6 +857,9 @@ var UI = function() {
         case 'background_color':
           $control.css( 'background-color', value.to_css() );
           break;
+        case 'tooltip':
+          $control.prop( 'title', value );
+          break;
         case 'visible':
           if ( properties.visible ) {
             $control.css( 'visibility', 'visible' );

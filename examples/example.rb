@@ -43,6 +43,7 @@ btn_hello = SKUI::Button.new( 'Hello' ) { |control|
   UI.messagebox( "Hello #{name}" )
 }
 btn_hello.position( -10, -10 )
+btn_hello.tooltip = 'Click me!'
 group.add_control( btn_hello )
 
 group2 = SKUI::Groupbox.new( 'Multiline Text and List' )
