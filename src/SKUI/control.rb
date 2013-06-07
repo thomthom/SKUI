@@ -107,6 +107,7 @@ module SKUI
     # @param [Numeric] width
     # @param [Numeric] height
     #
+    # @return [Array(width,height)]
     # @since 1.0.0
     def size( width, height )
       @properties[ :width ]  = width
