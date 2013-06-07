@@ -851,6 +851,12 @@ var UI = function() {
         case 'font_size':
           $control.css( 'font-size', value );
           break;
+        case 'foreground_color':
+          $control.css( 'color', value.to_css() );
+          break;
+        case 'background_color':
+          $control.css( 'background-color', value.to_css() );
+          break;
         case 'visible':
           if ( properties.visible ) {
             $control.css( 'visibility', 'visible' );
@@ -878,9 +884,6 @@ var UI = function() {
         break;
       case 'Checkbox':
         update_checkbox_properties( $control, properties );
-        break;
-      case 'Container':
-        update_container_properties( $control, properties );
         break;
       case 'Groupbox':
         update_groupbox_properties( $control, properties );
@@ -971,22 +974,6 @@ var UI = function() {
         break;
       case 'label':
         $label.text( value );
-        break;
-      }
-    }
-    return true;
-  }
-
-  function update_container_properties( $control, properties ) {
-    for ( property in properties ) {
-      value = properties[property];
-      switch ( property )
-      {
-      case 'foreground_color':
-        $control.css( 'color', value.to_css() );
-        break;
-      case 'background_color':
-        $control.css( 'background-color', value.to_css() );
         break;
       }
     }

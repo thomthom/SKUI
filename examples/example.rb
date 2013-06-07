@@ -12,6 +12,7 @@ group = SKUI::Groupbox.new( 'Groupbox' )
 group.position( 5, 5 )
 group.right = 5
 group.height = 100
+group.foreground_color = Sketchup::Color.new( 192, 0, 0 )
 window.add_control( group )
 
 txt_input = SKUI::Textbox.new( 'SketchUp' )
@@ -93,7 +94,7 @@ r3.position( 10, 60 )
 group3.add_control( r3 )
 
 container = SKUI::Container.new
-container.foreground_color = SKUI::SystemColor::APP_WORKSPACE
+container.foreground_color = SKUI::SystemColor::HIGHLIGHT
 container.background_color = Sketchup::Color.new( 192, 92, 64, 64 )
 container.stretch( 100, 20, 10, 5 )
 group3.add_control( container )

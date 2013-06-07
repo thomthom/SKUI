@@ -21,6 +21,14 @@ module SKUI
     # @since 1.0.0
     prop( :parent, &TypeCheck::CONTAINER )
 
+    # @return [Sketchup::Color, SystemColor]
+    # @since 1.0.0
+    prop( :foreground_color, &TypeCheck::COLOR )
+
+    # @return [Sketchup::Color, SystemColor]
+    # @since 1.0.0
+    prop( :background_color, &TypeCheck::COLOR )
+
     # @return [JSON]
     # @since 1.0.0
     attr_accessor( :properties )
