@@ -6,8 +6,9 @@ module SKUI
   # @since 1.0.0
   class Groupbox < Container
 
+    # @return [String]
     # @since 1.0.0
-    prop( :label )
+    prop( :label, &TypeCheck::STRING )
 
     # @param [String] label
     #

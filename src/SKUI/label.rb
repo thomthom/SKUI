@@ -6,10 +6,17 @@ module SKUI
   # @since 1.0.0
   class Label < Control
 
+    # @return [String]
     # @since 1.0.0
-    prop( :caption )
-    prop( :control )
-    prop( :url )
+    prop( :caption, &TypeCheck::STRING )
+
+    # @return [Control]
+    # @since 1.0.0
+    prop( :control, &TypeCheck::CONTROL )
+
+    # @return [String]
+    # @since 1.0.0
+    prop( :url, &TypeCheck::STRING )
 
     # @since 1.0.0
     define_event( :open_url )

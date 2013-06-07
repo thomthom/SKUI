@@ -6,8 +6,9 @@ module SKUI
   # @since 1.0.0
   class Button < Control
 
+    # @return [String]
     # @since 1.0.0
-    prop( :caption )
+    prop( :caption, &TypeCheck::STRING )
 
     # @since 1.0.0
     define_event( :click )

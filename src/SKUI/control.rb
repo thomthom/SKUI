@@ -10,18 +10,45 @@ module SKUI
   # @since 1.0.0
   class Control < Base
 
-    prop_reader( :ui_id ) # :id would conflict with Object.id
+    # ID string used by both Ruby and the WebDialog to keep each control in
+    # sync with each other when passing properties and events.
+    #
+    # @return [String]
+    # @since 1.0.0
+    prop_reader( :ui_id ) # (i) :id would conflict with Object.id
 
-    prop_bool( :enabled )
-    prop_bool( :visible )
+    # Alternative way to refer to a Control - by assigning a Symbol name to it
+    # you can refer to a control like so: `window.find_control_by_name( :foo )`
+    #
+    # @return [Symbol]
+    # @since 1.0.0
+    prop( :name, &TypeCheck::SYMBOL )
 
-    prop( :name )
-    prop( :left, :top, :right, :bottom )
-    prop( :width, :height )
-    prop( :tooltip )
+    # @return [Boolean]
+    # @since 1.0.0
+    prop_bool( :enabled, &TypeCheck::BOOLEAN )
 
+    # @return [Boolean]
+    # @since 1.0.0
+    prop_bool( :visible, &TypeCheck::BOOLEAN )
+
+    # @return [Integer]
+    # @since 1.0.0
+    prop( :left, :top, :right, :bottom, &TypeCheck::INTEGER )
+
+    # @return [Integer]
+    # @since 1.0.0
+    prop( :width, :height, &TypeCheck::INTEGER )
+
+    # @return [String]
+    # @since 1.0.0
+    prop( :tooltip, &TypeCheck::STRING )
+
+    # @since 1.0.0
     prop_writer( :font_name, :font_size ) # (!) Needs more work.
 
+    # @return [Rect]
+    # @since 1.0.0
     attr_reader( :rect )
 
     # @since 1.0.0

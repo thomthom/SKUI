@@ -6,10 +6,17 @@ module SKUI
   # @since 1.0.0
   class Listbox < Control
 
+    # @return [Array<String>]
     # @since 1.0.0
     prop_reader( :items )
     
-    prop( :multiple, :size )
+    # @return [Boolean]
+    # @since 1.0.0
+    prop_bool( :multiple, &TypeCheck::BOOLEAN )
+
+    # @return [Integer]
+    # @since 1.0.0
+    prop( :size, &TypeCheck::BOOLEAN )
 
     # @since 1.0.0
     define_event( :change )

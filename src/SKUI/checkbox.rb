@@ -6,9 +6,13 @@ module SKUI
   # @since 1.0.0
   class Checkbox < Control
 
-    prop( :label )
+    # @return [String]
+    # @since 1.0.0
+    prop( :label, &TypeCheck::STRING )
 
-    prop_reader_bool( :checked )
+    # @return [Boolean]
+    # @since 1.0.0
+    prop_reader_bool( :checked, &TypeCheck::BOOLEAN )
 
     # @since 1.0.0
     define_event( :change )

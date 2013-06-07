@@ -1,5 +1,6 @@
 module SKUI
 
+  require File.join( PATH, 'control_manager.rb' )
   require File.join( PATH, 'enum_system_color.rb' )
 
 
@@ -20,6 +21,12 @@ module SKUI
   module TypeCheck
 
     # @since 1.0.0
+    BOOLEAN = Proc.new { |value|
+      # Cast the value into true boolean values.
+      value ? true : false
+    }
+
+    # @since 1.0.0
     COLOR = Proc.new { |value|
       unless value.is_a?( Sketchup::Color ) || SystemColor.valid?( value )
         raise( ArgumentError, 'Not a valid color.' )
@@ -28,9 +35,43 @@ module SKUI
     }
 
     # @since 1.0.0
-    BOOLEAN = Proc.new { |value|
-      # Cast the value into true boolean values.
-      value ? true : false
+    CONTAINER = Proc.new { |value|
+      unless value.is_a?( ControlManager )
+        raise( ArgumentError, 'Not a valid container control.' )
+      end
+      value
+    }
+
+    # @since 1.0.0
+    CONTROL = Proc.new { |value|
+      unless value.is_a?( Control )
+        raise( ArgumentError, 'Not a valid control.' )
+      end
+      value
+    }
+
+    # @since 1.0.0
+    INTEGER = Proc.new { |value|
+      unless value.respond_to?( :to_i )
+        raise( ArgumentError, 'Not an valid Integer value.' )
+      end
+      value.to_i
+    }
+
+    # @since 1.0.0
+    STRING = Proc.new { |value|
+      unless value.respond_to?( :to_s )
+        raise( ArgumentError, 'Not a valid String value.' )
+      end
+      value.to_s
+    }
+
+    # @since 1.0.0
+    SYMBOL = Proc.new { |value|
+      unless value.is_a?( Symbol )
+        raise( ArgumentError, 'Not a Symbol.' )
+      end
+      value
     }
 
   end # module

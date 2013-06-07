@@ -10,9 +10,16 @@ module SKUI
     include Events
     extend Properties
 
-    prop( :parent )
+    # @return [ControlManager, Nil]
+    # @since 1.0.0
+    prop( :parent, &TypeCheck::CONTAINER )
 
+    # @return [JSON]
+    # @since 1.0.0
     attr_accessor( :properties )
+
+    # @return [Window, Nil]
+    # @since 1.0.0
     attr_accessor( :window )
 
     # @since 1.0.0

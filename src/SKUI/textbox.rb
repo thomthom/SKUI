@@ -6,9 +6,13 @@ module SKUI
   # @since 1.0.0
   class Textbox < Control
 
+    # @return [String]
     # @since 1.0.0
-    prop_reader_bool( :value )
-    prop_bool( :multiline )
+    prop_writer( :value, &TypeCheck::STRING )
+
+    # @return [Boolean]
+    # @since 1.0.0
+    prop_bool( :multiline, &TypeCheck::BOOLEAN )
 
     # @since 1.0.0
     define_event( :change )
