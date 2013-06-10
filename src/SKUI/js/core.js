@@ -867,11 +867,21 @@ var UI = function() {
             $control.css( 'visibility', 'hidden' );
           }
           break;
+        case 'enabled':
+          $control.toggleClass( 'disabled', !value );
+          $control.prop( 'disabled', !value );
+          $control.prop( 'readonly', !value );
+          // Disable form controls.
+          $form_elements = $control.find( 'input, select, textarea, button' );
+          $form_elements.prop( 'readonly', !value );
+          break;
         case 'disabled':
           $control.toggleClass( 'disabled', value );
+          $control.prop( 'disabled', value );
           $control.prop( 'readonly', value );
           // Disable form controls.
           $form_elements = $control.find( 'input, select, textarea, button' );
+          $form_elements.prop( 'disabled', value );
           $form_elements.prop( 'readonly', value );
           break;
         default:
