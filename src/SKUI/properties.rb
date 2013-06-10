@@ -8,6 +8,8 @@ module SKUI
   # @since 1.0.0
   module Properties
 
+    private
+
     # @param [Symbol] *symbols
     #
     # @return [Nil]
