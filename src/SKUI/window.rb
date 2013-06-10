@@ -135,7 +135,7 @@ module SKUI
         # Recreate WebDialog instance in order for last position and size to be
         # used. Otherwise old preferences would be used.
         @webdialog = init_webdialog( @options )
-        @bridge = Bridge.new( self, @webdialog )
+        @bridge.webdialog = @webdialog
         # OSX doesn't have modal WebDialogs. Instead a 'modal' WebDialog means
         # it'll stay on top of the SketchUp window - where as otherwist it'd
         # fall behind.
