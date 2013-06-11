@@ -2,7 +2,7 @@ module SKUI
   # @since 1.0.0
   module Debug
 
-    @enabled = true
+    @enabled = false
 
     # @since 1.0.0
     def self.enabled?

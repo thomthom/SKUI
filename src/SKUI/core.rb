@@ -18,6 +18,11 @@ module SKUI
   PLATFORM_IS_WINDOWS = !PLATFORM_IS_OSX
 
 
+  # Configure Debug mode.
+  require File.join( PATH, 'debug.rb' )
+  Debug.enabled = true
+
+
   # Load the availible UI control classes.
   require File.join( PATH, 'button.rb' )
   require File.join( PATH, 'checkbox.rb' )
