@@ -17,6 +17,14 @@ var Bridge = function() {
   return {
 
 
+    /* Prepares the communication bridge.
+     */
+    init : function() {
+      bridge = $('<input id="SKUI_RUBY_BRIDGE" type="hidden" />');
+      $('body').append( bridge );
+    },
+
+
     /* Escapes backslashes and single quotes.
      * (private ?)
      */
