@@ -30,7 +30,7 @@ var UI = function() {
 
     // Ensure links are opened in the default browser.
     redirect_links : function() {
-      $(document).on('click', 'a.url', function()
+      $(document).on('click', 'a', function()
       {
         window.location = 'skp:SKUI_Open_URL@' + this.href;
         return false;

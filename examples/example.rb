@@ -135,6 +135,11 @@ chk_hide.on( :change ) { |control|
 }
 window.add_control( chk_hide )
 
+lbl_url = SKUI::Label.new( 'SKUI on GitHub' )
+lbl_url.position( -85, -10 )
+lbl_url.url = 'https://github.com/thomthom/SKUI'
+window.add_control( lbl_url )
+
 btn_close = SKUI::Button.new( 'Close' ) { |control|
   control.window.close
 }
