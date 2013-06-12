@@ -42,19 +42,7 @@ var Bridge = function() {
       $('body script').detach();
       // Execute the JavaScript code and put the return value back into the
       // bridge.
-      try {
-        Bridge.return_ruby( eval(code_string) );
-      }
-      catch( error ) {
-        // (?) Maybe catch window.onerror instead for IE support.
-        //     http://stackoverflow.com/a/10711392/486990
-        msg =  "Name: " + error.name + "\n"
-        msg += "Number: " + error.number + "\n"
-        msg += "Error description: " + error.description + "\n\n"
-        msg += code_string
-        Console.log( msg );
-        throw error;
-      }
+      Bridge.return_ruby( eval(code_string) );
     },
 
 
