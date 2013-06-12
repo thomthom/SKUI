@@ -82,7 +82,7 @@ module SKUI
     # @return [String]
     # @since 1.0.0
     def object_id_hex
-      "0x%x" % ( self.object_id << 1 )
+      "0x%x" % ( object_id << 1 )
     end
 
     private
@@ -98,7 +98,7 @@ module SKUI
       if window && window.visible?
         # These properties must always be included unmodified.
         base_properties = {
-          :type => self.typename
+          :type => typename()
         }
         # The given properties will be sent to the WebDialog where it updates
         # the UI to match the state of the Ruby objects.
