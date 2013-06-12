@@ -26,6 +26,7 @@ head.js( path + 'ui.button.js' );
 head.js( path + 'ui.checkbox.js' );
 head.js( path + 'ui.container.js' );
 head.js( path + 'ui.groupbox.js' );
+head.js( path + 'ui.image.js' );
 head.js( path + 'ui.label.js' );
 head.js( path + 'ui.listbox.js' );
 head.js( path + 'ui.radiobutton.js' );

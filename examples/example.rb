@@ -3,7 +3,7 @@ load 'SKUI/core.rb'
 options = {
   :title           => 'SKUI Control Examples',
   :preferences_key => 'SKUI_Example',
-  :width           => 300,
+  :width           => 400,
   :height          => 400
 }
 window = SKUI::Window.new( options )
@@ -70,6 +70,14 @@ lst_list.on( :change ) { |control, value|
   puts "Listbox value: #{control.value}"
 }
 group2.add_control( lst_list )
+
+path = File.join( SKUI::PATH, '..', '..', 'examples' )
+file = File.join( path, 'cookie.png' )
+
+img_cookie = SKUI::Image.new( file )
+img_cookie.position( 280, 20 )
+img_cookie.width = 32
+group2.add_control( img_cookie )
 
 group3 = SKUI::Groupbox.new( 'Option Groups' )
 group3.position( 5, 245 )
