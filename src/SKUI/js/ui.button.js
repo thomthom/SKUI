@@ -8,7 +8,7 @@
 Button.prototype = new Control();
 Button.prototype.constructor = Button;
 
-function Button( jquery_element ){ 
+function Button( jquery_element ) {
   Control.call( this, jquery_element );
 }
 
@@ -32,7 +32,7 @@ Button.init = function( properties ) {
   $(document).on('mousedown', 'button', function() {
     $(this).addClass('pressed');
     return false;
-  }); 
+  });
   $(document).on('mouseup', 'button', function() {
     $(this).removeClass('pressed');
     return false;
@@ -40,7 +40,7 @@ Button.init = function( properties ) {
   return;
 }
 
-Button.prototype.set_caption = function( value ) { 
+Button.prototype.set_caption = function( value ) {
   this.control.text( value );
   return value;
 };

@@ -8,7 +8,7 @@
 RadioButton.prototype = new Checkbox();
 RadioButton.prototype.constructor = RadioButton;
 
-function RadioButton( jquery_element ){ 
+function RadioButton( jquery_element ) {
   Checkbox.call( this, jquery_element );
 }
 

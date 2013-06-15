@@ -8,7 +8,7 @@
 Textbox.prototype = new Control();
 Textbox.prototype.constructor = Textbox;
 
-function Textbox( jquery_element ){ 
+function Textbox( jquery_element ) {
   Control.call( this, jquery_element );
 }
 
@@ -40,7 +40,7 @@ Textbox.add = function( properties ) {
   return control;
 }
 
-Textbox.prototype.set_value = function( value ) { 
+Textbox.prototype.set_value = function( value ) {
   this.control.val( value );
   return value;
 };

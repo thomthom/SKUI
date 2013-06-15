@@ -8,7 +8,7 @@
 Groupbox.prototype = new Control();
 Groupbox.prototype.constructor = Groupbox;
 
-function Groupbox( jquery_element ){ 
+function Groupbox( jquery_element ) {
   Control.call( this, jquery_element );
 }
 

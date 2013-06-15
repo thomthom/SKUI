@@ -8,7 +8,7 @@
 Container.prototype = new Control();
 Container.prototype.constructor = Container;
 
-function Container( jquery_element ){ 
+function Container( jquery_element ) {
   Control.call( this, jquery_element );
 }
 

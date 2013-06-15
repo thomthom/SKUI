@@ -8,16 +8,16 @@
 Control.prototype = new Base();
 Control.prototype.constructor = Control;
 
-function Control( jquery_element ){ 
+function Control( jquery_element ) {
   Base.call( this, jquery_element );
 }
 
-Control.prototype.set_ui_id = function( value ) { 
+Control.prototype.set_ui_id = function( value ) {
   this.control.attr( 'id', value );
   return value;
 };
 
-Control.prototype.set_disabled = function( value ) { 
+Control.prototype.set_disabled = function( value ) {
   this.control.toggleClass( 'disabled', value );
   this.control.prop( 'disabled', value );
   this.control.prop( 'readonly', value );
@@ -28,12 +28,12 @@ Control.prototype.set_disabled = function( value ) {
   return value;
 };
 
-Control.prototype.set_enabled = function( value ) { 
+Control.prototype.set_enabled = function( value ) {
   this.set_disabled( !value );
   return value;
 };
 
-Control.prototype.set_visible = function( value ) { 
+Control.prototype.set_visible = function( value ) {
   if ( value ) {
     this.control.css( 'visibility', 'visible' );
   } else {
@@ -42,41 +42,41 @@ Control.prototype.set_visible = function( value ) {
   return value;
 };
 
-Control.prototype.set_top = function( value ) { 
+Control.prototype.set_top = function( value ) {
   this.control.css( 'position', 'absolute' );
   this.control.css( 'top', value );
   return value;
 };
 
-Control.prototype.set_left = function( value ) { 
+Control.prototype.set_left = function( value ) {
   this.control.css( 'position', 'absolute' );
   this.control.css( 'left', value );
   return value;
 };
 
-Control.prototype.set_bottom = function( value ) { 
+Control.prototype.set_bottom = function( value ) {
   this.control.css( 'position', 'absolute' );
   this.control.css( 'bottom', value );
   return value;
 };
 
-Control.prototype.set_right = function( value ) { 
+Control.prototype.set_right = function( value ) {
   this.control.css( 'position', 'absolute' );
   this.control.css( 'right', value );
   return value;
 };
 
-Control.prototype.set_width = function( value ) { 
+Control.prototype.set_width = function( value ) {
   this.control.outerWidth( value );
   return value;
 };
 
-Control.prototype.set_height = function( value ) { 
+Control.prototype.set_height = function( value ) {
   this.control.outerHeight( value );
   return value;
 };
 
-Control.prototype.set_tooltip = function( value ) { 
+Control.prototype.set_tooltip = function( value ) {
   this.control.prop( 'title', value );
   return value;
 };

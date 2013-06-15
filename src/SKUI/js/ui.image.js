@@ -8,7 +8,7 @@
 Image.prototype = new Control();
 Image.prototype.constructor = Image;
 
-function Image( jquery_element ){ 
+function Image( jquery_element ) {
   Control.call( this, jquery_element );
 }
 
@@ -25,7 +25,7 @@ Image.add = function( properties ) {
   return control;
 }
 
-Image.prototype.set_file = function( value ) { 
+Image.prototype.set_file = function( value ) {
   this.control.attr( 'src', value );
   return value;
 };

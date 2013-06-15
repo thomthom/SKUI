@@ -8,7 +8,7 @@
 Checkbox.prototype = new Control();
 Checkbox.prototype.constructor = Checkbox;
 
-function Checkbox( jquery_element ){ 
+function Checkbox( jquery_element ) {
   Control.call( this, jquery_element );
 }
 
@@ -31,13 +31,13 @@ Checkbox.add = function( properties ) {
   return control;
 }
 
-Checkbox.prototype.set_checked = function( value ) { 
+Checkbox.prototype.set_checked = function( value ) {
   $checkbox = this.control.children('input');
   $checkbox.prop( 'checked', value );
   return value;
 };
 
-Checkbox.prototype.set_label = function( value ) { 
+Checkbox.prototype.set_label = function( value ) {
   $label = this.control.children('span');
   $label.text( value );
   return value;

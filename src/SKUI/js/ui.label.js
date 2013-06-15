@@ -8,7 +8,7 @@
 Label.prototype = new Control();
 Label.prototype.constructor = Label;
 
-function Label( jquery_element ){ 
+function Label( jquery_element ) {
   Control.call( this, jquery_element );
 }
 

@@ -8,14 +8,14 @@
 function Base( jquery_element ) {
   this.control = jquery_element;
   this.parent = null;
-} 
+}
 
-Base.prototype.attach = function() { 
+Base.prototype.attach = function() {
   this.control.appendTo( this.parent );
   return;
 };
 
-Base.prototype.update = function( properties ) { 
+Base.prototype.update = function( properties ) {
   for ( property in properties ) {
     setter = 'set_' + property;
     value = properties[property];
@@ -28,7 +28,7 @@ Base.prototype.update = function( properties ) {
   return;
 };
 
-Base.prototype.set_parent = function( value ) { 
+Base.prototype.set_parent = function( value ) {
   if ( value == 'Window' ) {
     var $parent = $( 'body' );
   } else {
@@ -38,12 +38,12 @@ Base.prototype.set_parent = function( value ) {
   return value;
 };
 
-Base.prototype.set_background_color = function( value ) { 
+Base.prototype.set_background_color = function( value ) {
   this.control.css( 'background-color', value.to_css() );
   return value;
 };
 
-Base.prototype.set_foreground_color = function( value ) { 
+Base.prototype.set_foreground_color = function( value ) {
   this.control.css( 'color', value.to_css() );
   return value;
 };
