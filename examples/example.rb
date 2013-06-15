@@ -124,6 +124,7 @@ btn_test = SKUI::Button.new( 'Test' ) { |control|
   puts 'Testing...'
 }
 btn_test.position( 5, -5 )
+btn_test.font = SKUI::Font.new( 'Comic Sans MS', 14, true )
 window.add_control( btn_test )
 
 chk_hide = SKUI::Checkbox.new( 'Hide' )

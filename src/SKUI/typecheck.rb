@@ -51,6 +51,14 @@ module SKUI
     }
 
     # @since 1.0.0
+    FONT = Proc.new { |value|
+      unless value.is_a?( Font ) || SystemFont.valid?( value )
+        raise( ArgumentError, 'Not a valid font.' )
+      end
+      value
+    }
+
+    # @since 1.0.0
     INTEGER = Proc.new { |value|
       unless value.respond_to?( :to_i )
         raise( ArgumentError, 'Not an valid Integer value.' )

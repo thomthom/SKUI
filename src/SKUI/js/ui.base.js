@@ -47,3 +47,12 @@ Base.prototype.set_foreground_color = function( value ) {
   this.control.css( 'color', value.to_css() );
   return value;
 };
+
+Base.prototype.set_font = function( value ) {
+  if ( $.type( value ) == 'string' ) {
+    this.control.css( 'font', value ); // enum SystemFont
+  } else {
+    this.control.css( value ); // class Font
+  }
+  return value;
+};

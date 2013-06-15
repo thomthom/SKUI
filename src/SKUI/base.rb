@@ -3,7 +3,9 @@ module SKUI
   class Base
 
     require File.join( PATH, 'enum_system_color.rb' )
+    require File.join( PATH, 'enum_system_font.rb' )
     require File.join( PATH, 'events.rb' )
+    require File.join( PATH, 'font.rb' )
     require File.join( PATH, 'json.rb' )
     require File.join( PATH, 'properties.rb' )
     require File.join( PATH, 'typecheck.rb' )
@@ -21,6 +23,10 @@ module SKUI
     # @return [ControlManager, Nil]
     # @since 1.0.0
     prop( :parent, &TypeCheck::CONTAINER )
+
+    # @return [Font, SystemFont]
+    # @since 1.0.0
+    prop( :font, &TypeCheck::FONT )
 
     # @return [Sketchup::Color, SystemColor]
     # @since 1.0.0
