@@ -2,6 +2,7 @@ module SKUI
   # @since 1.0.0
   class Base
 
+    require File.join( PATH, 'enum_system_color.rb' )
     require File.join( PATH, 'events.rb' )
     require File.join( PATH, 'json.rb' )
     require File.join( PATH, 'properties.rb' )

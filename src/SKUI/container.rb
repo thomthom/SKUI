@@ -2,7 +2,6 @@ module SKUI
 
   require File.join( PATH, 'control.rb' )
   require File.join( PATH, 'control_manager.rb' )
-  require File.join( PATH, 'enum_system_color.rb' )
 
 
   # Container control grouping child controls.
