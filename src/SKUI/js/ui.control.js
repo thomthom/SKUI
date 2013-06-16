@@ -81,6 +81,11 @@ Control.prototype.set_z_index = function( value ) {
   return value;
 };
 
+Control.prototype.set_tab_index = function( value ) {
+  this.control.attr( 'tabIndex', value );
+  return value;
+};
+
 Control.prototype.set_tooltip = function( value ) {
   this.control.prop( 'title', value );
   return value;

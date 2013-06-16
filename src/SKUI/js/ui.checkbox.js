@@ -42,3 +42,9 @@ Checkbox.prototype.set_label = function( value ) {
   $label.text( value );
   return value;
 };
+
+Checkbox.prototype.set_tab_index = function( value ) {
+  $checkbox = this.control.children('input');
+  $checkbox.attr( 'tabIndex', value );
+  return value;
+};
