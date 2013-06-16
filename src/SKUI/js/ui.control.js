@@ -76,6 +76,11 @@ Control.prototype.set_height = function( value ) {
   return value;
 };
 
+Control.prototype.set_z_index = function( value ) {
+  this.control.css( 'z-index', value );
+  return value;
+};
+
 Control.prototype.set_tooltip = function( value ) {
   this.control.prop( 'title', value );
   return value;

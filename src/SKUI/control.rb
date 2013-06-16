@@ -32,6 +32,10 @@ module SKUI
     # @since 1.0.0
     prop( :width, :height, &TypeCheck::INTEGER )
 
+    # @return [Integer]
+    # @since 1.0.0
+    prop( :z_index, &TypeCheck::INTEGER )
+
     # @return [String]
     # @since 1.0.0
     prop( :tooltip, &TypeCheck::STRING )
