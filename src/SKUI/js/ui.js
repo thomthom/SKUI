@@ -8,6 +8,8 @@
 var UI = function() {
   return {
 
+    KEYCODE_ENTER : 13,
+    KEYCODE_ESC   : 27,
 
     init : function() {
       // Ruby Bridge
@@ -18,6 +20,7 @@ var UI = function() {
       UI.redirect_links();
       // Initialize controls. Some need some global events to function properly.
       // (?) Automate these call?
+      Window.init();
       Button.init();
       RadioButton.init();
       // Disable native browser functions to make the dialog appear more native.

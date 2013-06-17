@@ -27,6 +27,14 @@ module SKUI
     }
 
     # @since 1.0.0
+    BUTTON = Proc.new { |value|
+      unless value.is_a?( Button )
+        raise( ArgumentError, 'Not a valid button.' )
+      end
+      value
+    }
+
+    # @since 1.0.0
     COLOR = Proc.new { |value|
       unless value.is_a?( Sketchup::Color ) || SystemColor.valid?( value )
         raise( ArgumentError, 'Not a valid color.' )

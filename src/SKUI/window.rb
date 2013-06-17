@@ -13,6 +13,14 @@ module SKUI
 
     include ControlManager
 
+    # @return [String]
+    # @since 1.0.0
+    prop( :cancel_button, &TypeCheck::BUTTON )
+
+    # @return [String]
+    # @since 1.0.0
+    prop( :default_button, &TypeCheck::BUTTON )
+
     # @since 1.0.0
     define_event( :ready )
 

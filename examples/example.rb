@@ -147,4 +147,6 @@ btn_close = SKUI::Button.new( 'Close' ) { |control|
 btn_close.position( -5, -5 )
 window.add_control( btn_close )
 
+window.cancel_button = btn_close
+
 window.show
