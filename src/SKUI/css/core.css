@@ -74,11 +74,37 @@ body
 
 /*******************************************************************************
  *
- * $BUTTON
+ * $CHECKBOX
  *
  ******************************************************************************/
 
-button
+.control-checkbox
 {
-  /*line-height: 1em;*/
+  padding: 0 0 3px 0;
+}
+
+.control-checkbox input
+{
+  position: relative;
+  top: 2px;
+  padding: 0 3px 0 0;
+}
+
+
+/*******************************************************************************
+ *
+ * $CHECKBOX
+ *
+ ******************************************************************************/
+
+.control-radiobutton
+{
+  padding: 0 0 3px 0;
+}
+
+.control-radiobutton input
+{
+  position: relative;
+  top: 2px;
+  padding: 0 3px 0 0;
 }
