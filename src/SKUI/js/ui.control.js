@@ -43,25 +43,21 @@ Control.prototype.set_visible = function( value ) {
 };
 
 Control.prototype.set_top = function( value ) {
-  this.control.css( 'position', 'absolute' );
   this.control.css( 'top', value );
   return value;
 };
 
 Control.prototype.set_left = function( value ) {
-  this.control.css( 'position', 'absolute' );
   this.control.css( 'left', value );
   return value;
 };
 
 Control.prototype.set_bottom = function( value ) {
-  this.control.css( 'position', 'absolute' );
   this.control.css( 'bottom', value );
   return value;
 };
 
 Control.prototype.set_right = function( value ) {
-  this.control.css( 'position', 'absolute' );
   this.control.css( 'right', value );
   return value;
 };

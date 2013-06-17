@@ -52,9 +52,9 @@ body
  ******************************************************************************/
 
 
-.disabled
+.control
 {
-  /*opacity: 0.5;*/
+  position: absolute;
 }
 
 
@@ -67,7 +67,6 @@ body
 
 .container
 {
-  position: relative;
   overflow: hidden;
 }
 
