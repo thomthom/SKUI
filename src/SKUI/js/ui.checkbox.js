@@ -16,7 +16,8 @@ UI.Checkbox = Checkbox;
 
 Checkbox.add = function( properties ) {
   // Build DOM objects.
-  var $control = $('<label class="checkbox" />');
+  var $control = $('<label/>');
+  $control.addClass('control control-checkbox');
   var $label = $('<span/>');
   var $checkbox = $('<input type="checkbox" />');
   $checkbox.appendTo( $control );

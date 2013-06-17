@@ -17,6 +17,7 @@ UI.Button = Button;
 Button.add = function( properties ) {
   // Build DOM objects.
   var $control = $('<button></button>');
+  $control.addClass('control control-button');
   // Initialize wrapper.
   var control = new Button( $control );
   control.update( properties );

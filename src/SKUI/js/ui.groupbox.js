@@ -16,7 +16,8 @@ UI.Groupbox = Groupbox;
 
 Groupbox.add = function( properties ) {
   // Build DOM objects.
-  var $control = $('<fieldset class="container" />');
+  var $control = $('<fieldset/>');
+  $control.addClass('container control control-groupbox');
   var $label = $('<legend/>');
   $label.appendTo( $control );
   // Initialize wrapper.

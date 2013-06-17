@@ -16,7 +16,8 @@ UI.Container = Container;
 
 Container.add = function( properties ) {
   // Build DOM objects.
-  var $control = $('<div class="container" />');
+  var $control = $('<div/>');
+  $control.addClass('container control control-container');
   // Initialize wrapper.
   var control = new Container( $control );
   control.update( properties );

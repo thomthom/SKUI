@@ -17,6 +17,7 @@ UI.Label = Label;
 Label.add = function( properties ) {
   // Build DOM objects.
   var $control = $('<label><a/></label>');
+  $control.addClass('control control-label');
   // Initialize wrapper.
   var control = new Label( $control );
   control.update( properties );

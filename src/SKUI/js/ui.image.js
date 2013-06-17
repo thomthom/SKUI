@@ -17,6 +17,7 @@ UI.Image = Image;
 Image.add = function( properties ) {
   // Build DOM objects.
   var $control = $('<img/>');
+  $control.addClass('control control-image');
   // Initialize wrapper.
   var control = new Image( $control );
   control.update( properties );

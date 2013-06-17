@@ -17,10 +17,11 @@ UI.Textbox = Textbox;
 Textbox.add = function( properties ) {
   // Build DOM objects.
   if ( properties.multiline ) {
-    var $control = $('<textarea>');
+    var $control = $('<textarea/>');
   } else {
     var $control = $('<input type="text" />');
   }
+  $control.addClass('control control-textbox');
   // Initialize wrapper.
   var control = new Textbox( $control );
   control.update( properties );

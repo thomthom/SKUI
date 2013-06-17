@@ -17,6 +17,7 @@ UI.Listbox = Listbox;
 Listbox.add = function( properties ) {
   // Build DOM objects.
   var $control = $('<select/>')
+  $control.addClass('control control-listbox');
   // Initialize wrapper.
   var control = new Listbox( $control );
   control.update( properties );

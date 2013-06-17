@@ -16,7 +16,8 @@ UI.RadioButton = RadioButton;
 
 RadioButton.add = function( properties ) {
   // Build DOM objects.
-  var $control = $('<label class="radiobutton" />');
+  var $control = $('<label/>');
+  $control.addClass('control control-radiobutton');
   var $label = $('<span/>');
   var $checkbox = $('<input type="radio" />');
   $checkbox.appendTo( $control );
@@ -35,7 +36,8 @@ RadioButton.init = function( properties ) {
   $(document).on('change', 'input[type=radio]', function () {
     if ( $(this).prop('checked') == true ) {
       $control = $(this).parent();
-      $radiobuttons = $control.siblings('.radiobutton').children('input');
+      $siblings = $control.siblings('.control-radiobutton');
+      $radiobuttons = $siblings.children('input');
       $radiobuttons.prop('checked', false);
     }
   });
