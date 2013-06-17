@@ -21,11 +21,16 @@ module SKUI
     # @since 1.0.0
     prop( :default_button, &TypeCheck::BUTTON )
 
+    # @return [String]
+    # @since 1.0.0
+    prop( :theme, &TypeCheck::STRING )
+
     # @since 1.0.0
     define_event( :ready )
 
     # @since 1.0.0
-    THEME_DEFAULT = 'theme_os.css'.freeze
+    THEME_DEFAULT  = nil
+    THEME_GRAPHITE = File.join( PATH_CSS, 'theme_graphite.css' ).freeze
 
     # @private
     attr_reader( :bridge )
@@ -61,6 +66,8 @@ module SKUI
 
       @window = self
       @options = active_options
+
+      @properties[:theme] = @options[:theme]
 
       # Create a dummy WebDialog here in order for the Bridge to respond in a
       # more sensible manner other than being `nil`. The WebDialog is recreated
@@ -216,7 +223,7 @@ module SKUI
       trigger_event( :ready )
       nil
     end
-    
+
     # Called when a control triggers an event.
     # params possibilities:
     #   "<ui_id>||<event>"
