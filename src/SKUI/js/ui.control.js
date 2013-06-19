@@ -12,11 +12,6 @@ function Control( jquery_element ) {
   Base.call( this, jquery_element );
 }
 
-Control.prototype.set_ui_id = function( value ) {
-  this.control.attr( 'id', value );
-  return value;
-};
-
 Control.prototype.set_disabled = function( value ) {
   this.control.toggleClass( 'disabled', value );
   this.control.prop( 'disabled', value );

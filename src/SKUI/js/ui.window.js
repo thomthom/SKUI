@@ -5,7 +5,7 @@
  ******************************************************************************/
 
 
-Window.prototype = new Control();
+Window.prototype = new Base();
 Window.prototype.constructor = Window;
 
 function Window( jquery_element ) {

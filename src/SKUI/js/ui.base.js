@@ -28,6 +28,11 @@ Base.prototype.update = function( properties ) {
   return;
 };
 
+Base.prototype.set_ui_id = function( value ) {
+  this.control.attr( 'id', value );
+  return value;
+};
+
 Base.prototype.set_parent = function( value ) {
   if ( value == 'Window' ) {
     var $parent = $( 'body' );
