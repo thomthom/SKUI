@@ -39,11 +39,19 @@ Base.prototype.set_parent = function( value ) {
 };
 
 Base.prototype.set_background_color = function( value ) {
+  if ( value instanceof Color ) {
+    // IE8 Fallback due to lack of RGBa support.
+    this.control.css( 'background-color', value.opaque().to_css() );
+  }
   this.control.css( 'background-color', value.to_css() );
   return value;
 };
 
 Base.prototype.set_foreground_color = function( value ) {
+  if ( value instanceof Color ) {
+    // IE8 Fallback due to lack of RGBa support.
+    this.control.css( 'color', value.opaque().to_css() );
+  }
   this.control.css( 'color', value.to_css() );
   return value;
 };

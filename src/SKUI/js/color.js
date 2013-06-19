@@ -25,3 +25,7 @@ Color.prototype.to_css = function()
     return 'rgb('+this.r+', '+this.g+', '+this.b+')';
   }
 }
+Color.prototype.opaque = function()
+{
+  return new Color( this.r, this.g, this.b );
+}
