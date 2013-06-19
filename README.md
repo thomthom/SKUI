@@ -8,19 +8,23 @@ http://www.thomthom.net/software/sketchup/tt_lib2/doc/TT/GUI.html
 It's goal is to provide wrapper classes to manipulate GUI control elements in SketchUp's `UI::WebDialog` API.
 
 ```ruby
-options = {
-  :title           => 'Hello World',
-  :preferences_key => 'SKUI_Test',
-}
-w = SKUI::Window.new( options )
+w = SKUI::Window.new
 b = SKUI::Button.new( 'Hello' ) { puts 'World! :)' }
 b.position( 10, 5 )
 w.add_control( b )
 w.show
 ```
 
-# Data Syncronisation
+# Requirements
 
-## Properties
+* SketchUp 6+
+* Windows: Internet Explorer 8+ *
+* OSX: ?
 
-All the Ruby data that needs to be sent to the `UI::WebDialog` should be added to the `@property` stack. The update mechanism will push all required data to the `UI::WebDialog` where the GUI will be synced to match the state of the Ruby controls.
+_* RGBa colour values will display as opaque RGB in IE8_
+
+## Recommended
+
+* SketchUp 7+
+* Windows: Internet Explorer 9+
+* OSX: ?
