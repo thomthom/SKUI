@@ -1,38 +1,39 @@
 var path = '../js/';
 
 // Libraries
-head.js( path + 'lib/jquery.js' );
-head.js( path + 'lib/jquery.textchange.min.js' );
+$LAB
+.script( path + 'lib/jquery.js' )
+.script( path + 'lib/jquery.textchange.min.js' )
 
 // Classes
-head.js( path + 'color.js' );
-head.js( path + 'point3d.js' );
-head.js( path + 'string.js' );
-head.js( path + 'vector3d.js' );
+.script( path + 'color.js' )
+.script( path + 'point3d.js' )
+.script( path + 'string.js' )
+.script( path + 'vector3d.js' )
 
 // Modules
-head.js( path + 'bridge.js' );
-head.js( path + 'common.js' );
-head.js( path + 'console.js' );
-head.js( path + 'sketchup.js' );
-head.js( path + 'system.js' );
-head.js( path + 'ui.js' );
-head.js( path + 'webdialog.js' );
+.script( path + 'bridge.js' )
+.script( path + 'common.js' )
+.script( path + 'console.js' )
+.script( path + 'sketchup.js' )
+.script( path + 'system.js' )
+.script( path + 'ui.js' )
+.script( path + 'webdialog.js' ).wait() // All these can be loaded async.
 
 // UI Controls
-head.js( path + 'ui.base.js' );
-head.js( path + 'ui.control.js' );
-head.js( path + 'ui.button.js' );
-head.js( path + 'ui.checkbox.js' );
-head.js( path + 'ui.container.js' );
-head.js( path + 'ui.groupbox.js' );
-head.js( path + 'ui.image.js' );
-head.js( path + 'ui.label.js' );
-head.js( path + 'ui.listbox.js' );
-head.js( path + 'ui.radiobutton.js' );
-head.js( path + 'ui.textbox.js' );
-head.js( path + 'ui.window.js' );
-
-head.ready(function() {
-  UI.init();
+.script( path + 'ui.base.js' ).wait() // Control extends this.
+.script( path + 'ui.control.js' ).wait() // All controls extends this.
+.script( path + 'ui.button.js' )
+.script( path + 'ui.checkbox.js' ).wait() // RadioButton extends this.
+.script( path + 'ui.container.js' )
+.script( path + 'ui.groupbox.js' )
+.script( path + 'ui.image.js' )
+.script( path + 'ui.label.js' )
+.script( path + 'ui.listbox.js' )
+.script( path + 'ui.radiobutton.js' )
+.script( path + 'ui.textbox.js' )
+.script( path + 'ui.window.js' ).wait(function() {
+  $(document).ready(function() {
+    UI.init();
+  })
 });
