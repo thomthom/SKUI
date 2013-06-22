@@ -59,14 +59,14 @@ txt_area = SKUI::Textbox.new( 'Lorem Ipsum' )
 txt_area.multiline = true
 txt_area.position( 10, 20 )
 txt_area.width = 130
-txt_area.height = 100
+txt_area.height = 90
 group2.add_control( txt_area )
 
 list = %w{ Hello World Lorem Ipsum }
 lst_list = SKUI::Listbox.new( list )
 lst_list.multiple = true
 lst_list.value = lst_list.items.first
-lst_list.position( 140, 20 )
+lst_list.position( 145, 20 )
 lst_list.width = 130
 lst_list.height = 90
 lst_list.on( :change ) { |control, value|

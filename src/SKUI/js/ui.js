@@ -12,11 +12,9 @@ var UI = function() {
     KEYCODE_ESC   : 27,
 
     init : function() {
-      // Ruby Bridge
       Bridge.init();
-      // Focus property
+      UI.add_system_hooks();
       UI.add_focus_property(); // (?) Needed? Gives IE7 support, but...
-      // URL Links
       UI.redirect_links();
       // Initialize controls. Some need some global events to function properly.
       // (?) Automate these call?
@@ -68,6 +66,15 @@ var UI = function() {
       $(document).on('focusout', 'input', function () {
         $(this).removeClass('focus');
       });
+    },
+
+
+    add_system_hooks : function() {
+      if ( Sketchup.platform() == 'PC' ) {
+        $('body').addClass('platform-windows');
+      } else {
+        $('body').addClass('platform-osx');
+      }
     },
 
 

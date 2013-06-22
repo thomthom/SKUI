@@ -16,13 +16,16 @@ UI.Listbox = Listbox;
 
 Listbox.add = function( properties ) {
   // Build DOM objects.
-  var $control = $('<select/>')
+  // (i) <SELECT> element needs to be wrapped to ensure consistent sizing.
+  var $control = $('<div/>')
   $control.addClass('control control-listbox');
+  var $select = $('<select/>')
+  $select.appendTo( $control );
   // Initialize wrapper.
   var control = new Listbox( $control );
   control.update( properties );
   // Set up events.
-  $control.change( function(){
+  $select.change( function(){
     var $this = $(this);
     var args = [ $this.val() ];
     Sketchup.callback( $control.attr( 'id' ), 'change', args );
@@ -33,27 +36,31 @@ Listbox.add = function( properties ) {
 }
 
 Listbox.prototype.set_items = function( value ) {
-  this.control.empty();
+  $select = this.control.children('select');
+  $select.empty();
   for ( i in value ) {
     $item = $('<option/>');
     $item.text( value[i] );
     $item.val( value[i] );
-    $item.appendTo( this.control );
+    $item.appendTo( $select );
   }
   return value;
 };
 
 Listbox.prototype.set_multiple = function( value ) {
-  this.control.prop( 'multiple', value );
+  $select = this.control.children('select');
+  $select.prop( 'multiple', value );
   return value;
 };
 
 Listbox.prototype.set_size = function( value ) {
-  this.control.attr( 'size', value )
+  $select = this.control.children('select');
+  $select.attr( 'size', value )
   return value;
 };
 
 Listbox.prototype.set_value = function( value ) {
-  this.control.val( value );
+  $select = this.control.children('select');
+  $select.val( value );
   return value;
 };

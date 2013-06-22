@@ -337,7 +337,7 @@ module SKUI
       end
       # Hide the navigation buttons that appear on OSX.
       if webdialog.respond_to?( :navigation_buttons_enabled= )
-        webdialog.navigation_buttons_enabled = true
+        webdialog.navigation_buttons_enabled = false
       end
       # Ensure the size for fixed windows is set - otherwise SketchUp will use
       # the last saved properties.
