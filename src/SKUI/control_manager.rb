@@ -2,16 +2,16 @@ module SKUI
   # @abstract `Container` and `Window` implements this.
   # @since 1.0.0
   module ControlManager
-  
+
     # @since 1.0.0
     attr( :controls )
-    
+
     # @since 1.0.0
     def initialize
       super()
       @controls = []
     end
-    
+
     # @param [Control] control
     #
     # @return [Boolean] `True` if the webdialog was open and the control added.
@@ -34,7 +34,7 @@ module SKUI
       end
       false
     end
-    
+
     # @param [String] ui_id
     #
     # @return [Control,Nil]
@@ -49,7 +49,7 @@ module SKUI
       end
       nil
     end
-    
+
     # @param [Symbol] name
     #
     # @return [Control,Nil]
@@ -65,7 +65,7 @@ module SKUI
       nil
     end
     alias :[] :find_control_by_name
-    
+
     # @see Control#release!
     # @return [Nil]
     # @since 1.0.0
@@ -76,7 +76,7 @@ module SKUI
       @controls.clear
       super
     end
-    
+
     # @param [Control] control
     #
     # @return [Boolean] `True` if the webdialog was open and the control removed.
@@ -93,6 +93,6 @@ module SKUI
       end
       false
     end
-    
+
   end # module
 end # module

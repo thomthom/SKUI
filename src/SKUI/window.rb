@@ -260,10 +260,9 @@ module SKUI
     # @since 1.0.0
     def event_window_ready( webdialog, params )
       Debug.puts( '>> Dialog Ready' )
-      bridge.call( 'Bridge.set_window_id', ui_id )
+      @bridge.call( 'Bridge.set_window_id', ui_id )
       update_properties( *@properties.keys )
-      bridge.add_container( self )
-      # (!) Inject theme CSS.
+      @bridge.add_container( self )
       trigger_event( :ready )
       nil
     end
@@ -298,7 +297,7 @@ module SKUI
     ensure
       # Inform the Webdialog the message was received so it can process any
       # remaining messages.
-      bridge.call( 'Bridge.pump_message' )
+      @bridge.call( 'Bridge.pump_message' )
       nil
     end
 
