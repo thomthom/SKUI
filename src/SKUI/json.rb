@@ -37,6 +37,12 @@ module SKUI
     end
 
     # @since 1.0.0
+    def clear
+      @hash.clear
+      @ordered_keys.clear
+    end
+
+    # @since 1.0.0
     def each
       @ordered_keys.each { |key| yield( key, @hash[key] ) }
     end

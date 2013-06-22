@@ -159,5 +159,13 @@ module SKUI
     end
     alias :get_element_value :get_control_value
 
+    # @return [Nil]
+    # @since 1.0.0
+    def release!
+      @window = nil
+      @webdialog = nil
+      nil
+    end
+
   end # class
 end # module

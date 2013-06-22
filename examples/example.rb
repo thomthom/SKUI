@@ -1,5 +1,8 @@
 load 'SKUI/core.rb'
 
+module SKUI::Examples
+def self.show
+
 options = {
   :title           => 'SKUI Control Examples',
   :preferences_key => 'SKUI_Example',
@@ -151,3 +154,8 @@ window.default_button = btn_test
 window.cancel_button = btn_close
 
 window.show
+
+window
+end # def
+end # module
+window = SKUI::Examples.show

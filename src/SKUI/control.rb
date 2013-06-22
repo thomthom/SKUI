@@ -90,6 +90,16 @@ module SKUI
       [ x, y ]
     end
 
+    # @see Base#release!
+    # @return [Nil]
+    # @since 1.0.0
+    def release!
+      super
+      @rect.release!
+      @rect = nil
+      nil
+    end
+
     # @param [Numeric] width
     # @param [Numeric] height
     #

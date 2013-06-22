@@ -73,6 +73,8 @@ module SKUI
     # @since 1.0.0
     def release!
       release_events()
+      @properties.clear
+      @properties = nil
       @parent = nil
       @window = nil
       nil

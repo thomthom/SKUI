@@ -51,6 +51,14 @@ module SKUI
       get_rect[ 'height' ]
     end
 
+    # @see Base#release!
+    # @return [Nil]
+    # @since 1.0.0
+    def release!
+      @control = nil
+      nil
+    end
+
     # @return [Hash]
     # @since 1.0.0
     def to_hash

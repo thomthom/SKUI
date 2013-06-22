@@ -122,6 +122,20 @@ module SKUI
       @webdialog.close
     end
 
+    # @see Base#release!
+    # @return [Nil]
+    # @since 1.0.0
+    def release!
+      @webdialog.close if @webdialog.visible?
+      super
+      @bridge.release!
+      @bridge = nil
+      @options.clear
+      @options = nil
+      @webdialog = nil
+      nil
+    end
+
     # @overload set_position( left, top )
     #   @param [Numeric] left
     #   @param [Numeric] top
@@ -193,6 +207,36 @@ module SKUI
       @webdialog.write_image( *args )
     end
 
+    # @private
+    #
+    # Because closures captures the local variables, including `self` the
+    # callback is set up in a class method to prevent the closure from capturing
+    # the reference to the `Window` instance. It's not pretty, but it ensures
+    # that all objects can be garbage collected.
+    #
+    # @param [UI::WebDialog] webdialog
+    # @param [String] callback_name
+    # @param [Symbol] method_id
+    #
+    # @return [Nil]
+    # @since 1.0.0
+    def self.add_callback( webdialog, callback_name, method_id )
+      webdialog.add_action_callback( callback_name ) { |wd, params|
+        window = nil
+        ObjectSpace.each_object( Bridge ) { |bridge|
+          if bridge.webdialog == wd
+            window = bridge.window
+            break
+          end
+        }
+        window.send( method_id, wd, params )
+      }
+      # Cleans up the capture references from the block. Otherwise the webdialog
+      # will not be garbage collected.
+      webdialog = nil
+      nil
+    end
+
     private
 
     # @param [UI::WebDialog] webdialog
@@ -202,8 +246,8 @@ module SKUI
     # @return [Nil]
     # @since 1.0.0
     def add_callback( webdialog, callback_name, method_id )
-      proc = method( method_id ).to_proc
-      webdialog.add_action_callback( callback_name, &proc )
+      # Syntax sugar wrapping the original implementation.
+      self.class.add_callback( webdialog, callback_name, method_id )
       nil
     end
 
@@ -325,8 +369,9 @@ module SKUI
           webdialog.max_width = options[:height_limit]
         end
       end
-      # (i) If procs are created in the initalize method for #add_action_callback
-      #     then the WebDialog instance will not GC.
+      # (i) If procs are created for #add_action_callback in instance methods
+      #     then the WebDialog instance will not GC. Call a wrapper that
+      #     prevents this.
       add_callback( webdialog, 'SKUI_Window_Ready',   :event_window_ready )
       add_callback( webdialog, 'SKUI_Event_Callback', :event_callback )
       add_callback( webdialog, 'SKUI_Open_URL',       :event_open_url )

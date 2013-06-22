@@ -71,7 +71,7 @@ module SKUI
     # @since 1.0.0
     def release!
       for control in @controls
-        control.release!
+        remove_control( control )
       end
       @controls.clear
       super
@@ -88,7 +88,7 @@ module SKUI
       control_ui_id = control.ui_id
       control.release!
       if self.window && self.window.visible?
-        self.window.call_script( 'UI.remove_control', control_ui_id )
+        self.window.bridge.call( 'UI.remove_control', control_ui_id )
         return true
       end
       false
