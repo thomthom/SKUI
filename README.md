@@ -13,10 +13,6 @@ The goal of this framework is to provide Ruby wrapper classes to manipulate GUI 
 
 It is forked from the [`TT::GUI` module](http://www.thomthom.net/software/sketchup/tt_lib2/doc/TT/GUI.html ) from the [TT_Lib² library](https://bitbucket.org/thomthom/tt-library-2).
 
-## Version compatibility
-
-Once version 1 is release, updates should preserve backwards compatibility within their major version. Breaking changes will be scheduled for next major version release.
-
 ## Hello World
 
 ```ruby
@@ -26,6 +22,10 @@ b.position( 10, 5 )
 w.add_control( b )
 w.show
 ```
+
+## Version compatibility
+
+Once version 1 is release, updates should preserve backwards compatibility within their major version. Breaking changes will be scheduled for next major version release.
 
 # Requirements
 
