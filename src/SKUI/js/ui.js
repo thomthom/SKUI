@@ -11,10 +11,11 @@ var UI = function() {
     KEYCODE_ENTER : 13,
     KEYCODE_ESC   : 27,
 
+
     init : function() {
       Bridge.init();
       UI.add_system_hooks();
-      UI.add_focus_property(); // (?) Needed? Gives IE7 support, but...
+      UI.add_focus_property();
       UI.redirect_links();
       // Initialize controls. Some need some global events to function properly.
       // (?) Automate these call?
@@ -29,7 +30,9 @@ var UI = function() {
     },
 
 
-    // Ensure links are opened in the default browser.
+    /* Ensure links are opened in the default browser. This ensures that the
+     * WebDialog doesn't replace the content with the target URL.
+     */
     redirect_links : function() {
       $(document).on('click', 'a', function()
       {
@@ -39,7 +42,9 @@ var UI = function() {
     },
 
 
-    // Ensure links are opened in the default browser.
+    /* Disables text selection on elements other than input type elements where
+     * it makes sense to allow selections. This mimics native windows.
+     */
     disable_select : function() {
       $(document).on('mousedown selectstart', function(e) {
         return $(e.target).is('input, textarea, select, option');
@@ -47,7 +52,9 @@ var UI = function() {
     },
 
 
-    // Ensure links are opened in the default browser.
+    /* Disables the context menu with the exception for textboxes in order to
+     * mimic native windows.
+     */
     disable_context_menu : function() {
       $(document).on('contextmenu', function(e) {
         return $(e.target).is('input[type=text], textarea');
@@ -69,6 +76,9 @@ var UI = function() {
     },
 
 
+    /* Adds a platform specific class to the BODY element that can be used as a
+     * hook for CSS to make platform adjustments.
+     */
     add_system_hooks : function() {
       if ( Sketchup.platform() == 'PC' ) {
         $('body').addClass('platform-windows');
@@ -78,7 +88,8 @@ var UI = function() {
     },
 
 
-    /* Adds a control to the window.
+    /* Adds a control to the window. Called from the Ruby side with a JSON
+     * object describing the control.
      */
     add_control : function(properties) {
       if ( properties.type in UI ) {
@@ -92,6 +103,12 @@ var UI = function() {
     },
 
 
+    /* Attaches an event to the control. Used by the control classes to set up
+     * the events that is relayed back to the Ruby side.
+     *
+     * The optional `$child` argument is used when the event is coming from a
+     * child DOM element.
+     */
     add_event : function( eventname, $control, $child ) {
       control = $child || $control
       control.on( eventname, function( event ) {
@@ -115,6 +132,8 @@ var UI = function() {
         }
         */
         // Defer some events to allow content to update.
+        // (i) When IE7 is not supported longer these events might be deprecated
+        //     in favour of HTML5's `input` event.
         var defer_events = [ 'copy', 'cut', 'paste' ];
         if ( $.inArray( eventname, defer_events ) ) {
           setTimeout( function() {
@@ -128,7 +147,7 @@ var UI = function() {
     },
 
 
-    /* Removes a control from the window.
+    /* Removes a control from the window. Called from the Ruby side.
      */
     remove_control : function( control ) {
       var $control = get_object(control);
@@ -137,7 +156,9 @@ var UI = function() {
     },
 
 
-    /* Adds a control to the window.
+    /* Updates the given control with the given JSON properties object. The
+     * control argument can be either a jQuery object or a string representing
+     * the ID of the DOM element.
      */
     update_properties : function( control_or_ui_id, properties ) {
       var $control = get_object( control_or_ui_id );
@@ -155,8 +176,12 @@ var UI = function() {
 
   };
 
+
   /* PRIVATE */
 
+
+  /* Returns a jQuery object given a jQuery object or DOM id string.
+   */
   function get_object( id_or_object ) {
     if ( $.type( id_or_object ) == 'string' ) {
       return $( '#' + id_or_object );
