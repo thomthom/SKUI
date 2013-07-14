@@ -13,6 +13,7 @@ var UI = function() {
 
 
     init : function() {
+      UI.check_environment();
       Bridge.init();
       UI.add_system_hooks();
       UI.add_focus_property();
@@ -29,6 +30,22 @@ var UI = function() {
       window.location = 'skp:SKUI_Window_Ready';
     },
 
+    /* Ensure links are opened in the default browser. This ensures that the
+     * WebDialog doesn't replace the content with the target URL.
+     */
+    check_environment : function() {
+      // Safari don't include a version number. So we cannot test that. But most
+      // likely it'll be more up to date and compatible than IE.
+      var pattern = /msie\s+(\d+\.\d+)/i
+      var result = pattern.exec( navigator.userAgent );
+      if ( result && parseFloat(result[1]) < 7.0 ) {
+        var $warning = $('<div class="warning"/>');
+        var app = navigator.appName;
+        $warning.text( 'A newer version of ' + app + 'is required for SKUI to' +
+          ' function properly.' );
+        $warning.appendTo( $('body') );
+      }
+    },
 
     /* Ensure links are opened in the default browser. This ensures that the
      * WebDialog doesn't replace the content with the target URL.
