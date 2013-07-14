@@ -4,7 +4,6 @@ This project is at it's early stages. Many changes will happen. Please do not ma
 
 ## To-do
 
-* Work out an easy way of implement and distribute. #39
 * Address [Milestone 1 Issues](https://github.com/thomthom/SKUI/issues?milestone=1&state=open)
 
 # Overview
