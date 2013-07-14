@@ -11,12 +11,13 @@ var UI = function() {
     KEYCODE_ENTER : 13,
     KEYCODE_ESC   : 27,
 
+    MIN_IE_VERSION : 8.0,
+
 
     init : function() {
       UI.check_environment();
       Bridge.init();
       UI.add_system_hooks();
-      UI.add_focus_property();
       UI.redirect_links();
       // Initialize controls. Some need some global events to function properly.
       // (?) Automate these call?
@@ -38,7 +39,7 @@ var UI = function() {
       // likely it'll be more up to date and compatible than IE.
       var pattern = /msie\s+(\d+\.\d+)/i
       var result = pattern.exec( navigator.userAgent );
-      if ( result && parseFloat(result[1]) < 7.0 ) {
+      if ( result && parseFloat(result[1]) < UI.MIN_IE_VERSION ) {
         var $warning = $('<div class="warning"/>');
         var app = navigator.appName;
         $warning.text( 'A newer version of ' + app + 'is required for SKUI to' +
@@ -75,20 +76,6 @@ var UI = function() {
     disable_context_menu : function() {
       $(document).on('contextmenu', function(e) {
         return $(e.target).is('input[type=text], textarea');
-      });
-    },
-
-
-    /* Loops over all input elements and ensure that they get an .focus class
-     * added upon focus and remove it when it loses focus. This is a workaround
-     * for IE7's lack of :hover support.
-     */
-    add_focus_property : function() {
-      $(document).on('focusin', 'input', function () {
-        $(this).addClass('focus');
-      });
-      $(document).on('focusout', 'input', function () {
-        $(this).removeClass('focus');
       });
     },
 
@@ -149,7 +136,7 @@ var UI = function() {
         }
         */
         // Defer some events to allow content to update.
-        // (i) When IE7 is not supported longer these events might be deprecated
+        // (i) When IE8 is not supported longer these events might be deprecated
         //     in favour of HTML5's `input` event.
         var defer_events = [ 'copy', 'cut', 'paste' ];
         if ( $.inArray( eventname, defer_events ) ) {
