@@ -39,3 +39,8 @@ _* RGBa colour values will display as opaque RGB in IE8_
 * SketchUp 7+
 * Windows: Internet Explorer 9+
 * OSX: ?
+
+# Documentation
+
+* [Wiki](https://github.com/thomthom/SKUI/wiki)
+* API documentation _([Coming](https://github.com/thomthom/SKUI/issues/5))_
