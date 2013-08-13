@@ -26,6 +26,11 @@ w.show
 
 Once version 1 is release, updates should preserve backwards compatibility within their major version. Breaking changes will be scheduled for next major version release.
 
+## License
+
+See the `LICENSE` file. It is based on the MIT license, but includes extra requirements that require derived work to ensure it doesn't conflict with the
+original work.
+
 # Requirements
 
 * SketchUp 6+
