@@ -25,7 +25,7 @@ Listbox.add = function( properties ) {
   var control = new Listbox( $control );
   control.update( properties );
   // Set up events.
-  $select.change( function(){
+  $select.change( function() {
     var $this = $(this);
     var args = [ $this.val() ];
     Sketchup.callback( $control.attr( 'id' ), 'change', args );
@@ -33,7 +33,39 @@ Listbox.add = function( properties ) {
   // Attach to document.
   control.attach();
   return control;
-}
+};
+
+Listbox.add_item = function( ui_id, value, index ) {
+  $control = $('#' + ui_id);
+  $select = $control.children('select');
+  $items = $select.children('option');
+  $item = $('<option/>');
+  $item.text( value );
+  $item.val( value );
+  if ( typeof index === 'undefined' || index < 0 || index >= $items.length ) {
+    $item.appendTo( $select );
+  } else {
+    $index_item = $items.eq( index );
+    $item.insertBefore( $index_item );
+  }
+  return value;
+};
+
+Listbox.clear = function( ui_id ) {
+  $control = $('#' + ui_id);
+  $select = $control.children('select');
+  $items = $select.children('option');
+  $items.detach();
+  return;
+};
+
+Listbox.remove_item = function( ui_id, index ) {
+  $control = $('#' + ui_id);
+  $select = $control.children('select');
+  $items = $select.children('option');
+  $items.eq(index).detach();
+  return index;
+};
 
 Listbox.prototype.set_items = function( value ) {
   $select = this.control.children('select');
