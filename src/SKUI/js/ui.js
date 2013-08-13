@@ -52,7 +52,7 @@ var UI = function() {
      * WebDialog doesn't replace the content with the target URL.
      */
     redirect_links : function() {
-      $(document).on('click', 'a', function()
+      $(document).on('click', 'a[href]', function()
       {
         window.location = 'skp:SKUI_Open_URL@' + this.href;
         return false;
