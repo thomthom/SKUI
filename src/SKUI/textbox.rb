@@ -32,7 +32,9 @@ module SKUI
     # @return [String]
     # @since 1.0.0
     def value
-      value = window.bridge.get_control_value( ui_id )
+      data = window.bridge.get_value( "##{ui_id} input, ##{ui_id} textarea" )
+      @properties[ :value ] = data
+      data
     end
 
   end # class
