@@ -19,7 +19,9 @@ Listbox.add = function( properties ) {
   // (i) <SELECT> element needs to be wrapped to ensure consistent sizing.
   var $control = $('<div/>')
   $control.addClass('control control-listbox');
-  var $select = $('<select/>')
+  var $select = $('<select/>');
+  $select.attr('id', properties.ui_id + '_ui');
+  $select.addClass('focus-target');
   $select.appendTo( $control );
   // Initialize wrapper.
   var control = new Listbox( $control );

@@ -33,7 +33,16 @@ Label.prototype.set_caption = function( value ) {
 };
 
 Label.prototype.set_control = function( value ) {
-  this.control.attr( 'for', value );
+  var control_id = value
+  var $control = $( '#'+value );
+  // Some times the actual UI element (INPUT, TEXTAREA, etc) might be wrapped in
+  // another HTML element. An assumption is made that the actual UI element is
+  // an immediate child of the wrapper and has a ".focus-target" class.
+  var $focus_target = $control.children('.focus-target');
+  if ( $focus_target.length > 0 ) {
+    control_id = $focus_target.attr('id');
+  }
+  this.control.attr( 'for', control_id );
   return value;
 };
 

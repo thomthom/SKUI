@@ -24,6 +24,8 @@ Textbox.add = function( properties ) {
   } else {
     var $textbox = $('<input type="text" />');
   }
+  $textbox.attr('id', properties.ui_id + '_ui');
+  $textbox.addClass('focus-target');
   $textbox.appendTo( $control );
   // Initialize wrapper.
   var control = new Textbox( $control );
