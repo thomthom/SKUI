@@ -16,14 +16,22 @@ var Sketchup = function() {
 
     /* Relay events back to the webdialog.
      */
-    callback : function( controlID, event, args ) {
-      if ( args === undefined ) {
-        params = controlID+'||'+event;
-      }
-      else {
-        params = controlID+'||'+event+'||'+args.join(',');
-      }
-      Bridge.queue_message( params )
+    callback : function( event_name /*, *args*/ ) {
+      var args = Array.prototype.slice.call( arguments );
+      var message = args.join( '||' );
+      Bridge.queue_message( message );
+    },
+
+    /* Relay control events back to the webdialog.
+     */
+    control_callback : function( ui_id, event_name, event_args ) {
+      var args = [
+        'SKUI::Control.on_event',
+        ui_id,
+        event_name
+      ].concat( event_args );
+      Sketchup.callback.apply( this, args );
+      //Sketchup.callback( 'SKUI::Control.on_event', ui_id, event, args );
     },
 
     /* Returns the hosting SketchUp version from the user agent string.
@@ -63,5 +71,11 @@ var Sketchup = function() {
 
 
   };
+
+
+  /* Helper function to simulate the Ruby *splat argument syntax. */
+  function get_splat_args( func, args ) {
+    return Array.prototype.slice.call( args, func.length );
+  }
 
 }(); // Sketchup

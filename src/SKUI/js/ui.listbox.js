@@ -30,7 +30,7 @@ Listbox.add = function( properties ) {
   $select.change( function() {
     var $this = $(this);
     var args = [ $this.val() ];
-    Sketchup.callback( $control.attr( 'id' ), 'change', args );
+    this.callback( 'change', args );
   } );
   // Attach to document.
   control.attach();

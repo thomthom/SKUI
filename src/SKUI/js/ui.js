@@ -28,7 +28,7 @@ var UI = function() {
       UI.disable_select();
       UI.disable_context_menu();
       // Ready Event
-      window.location = 'skp:SKUI_Window_Ready';
+      Sketchup.callback('SKUI::Window.on_ready')
     },
 
     /* Ensure links are opened in the default browser. This ensures that the
@@ -54,7 +54,7 @@ var UI = function() {
     redirect_links : function() {
       $(document).on('click', 'a[href]', function()
       {
-        window.location = 'skp:SKUI_Open_URL@' + this.href;
+        Sketchup.callback('SKUI::Window.on_open_url', this.href)
         return false;
       } );
     },
@@ -135,16 +135,17 @@ var UI = function() {
           break;
         }
         */
+        var ui_id = $control.attr( 'id' );
         // Defer some events to allow content to update.
         // (i) When IE8 is not supported longer these events might be deprecated
         //     in favour of HTML5's `input` event.
         var defer_events = [ 'copy', 'cut', 'paste' ];
         if ( $.inArray( eventname, defer_events ) ) {
           setTimeout( function() {
-            Sketchup.callback( $control.attr( 'id' ), eventname, args );
+            Sketchup.control_callback( ui_id, eventname, args );
           }, 0 );
         } else {
-          Sketchup.callback( $control.attr( 'id' ), eventname, args );
+          Sketchup.control_callback( ui_id, eventname, args );
         }
         return true;
       } );

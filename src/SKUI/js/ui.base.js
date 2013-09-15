@@ -15,6 +15,12 @@ Base.prototype.attach = function() {
   return;
 };
 
+Base.prototype.callback = function( event_name, arguments ) {
+  var ui_id = this.control.attr( 'id' );
+  Sketchup.control_callback( ui_id, event_name, arguments );
+  return;
+};
+
 Base.prototype.update = function( properties ) {
   for ( property in properties ) {
     setter = 'set_' + property;

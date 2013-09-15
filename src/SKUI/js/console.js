@@ -11,7 +11,7 @@ var Console = function() {
     /* Relay strings back to the SketchUp Ruby Console.
      */
     log : function( string ) {
-      Sketchup.callback( 'Console', 'log', [string] );
+      Sketchup.callback( 'SKUI::Console.log', string );
     }
 
 

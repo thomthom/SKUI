@@ -69,7 +69,8 @@ module SKUI
         end
       end
       # (?) Catch JavaScript errors? Or just let the WebDialog display the error?
-      raw_data = @webdialog.get_element_value( 'SKUI_RUBY_BRIDGE' );
+      raw_data = @webdialog.get_element_value( 'SKUI_RUBY_BRIDGE' )
+      @webdialog.execute_script( 'Bridge.reset()' )
       # The JS Bridge converts the JS values into Ruby code strings.
       # (?) Catch exceptions? Re-raise with custom exception?
       eval( raw_data ) # (?) Bind to top level scope?

@@ -251,48 +251,31 @@ module SKUI
       nil
     end
 
-    # Called when the HTML DOM is ready.
-    #
-    # @param [UI::WebDialog] webdialog
-    # @param [String] params
-    #
-    # @return [Nil]
-    # @since 1.0.0
-    def event_window_ready( webdialog, params )
-      Debug.puts( '>> Dialog Ready' )
-      @bridge.call( 'Bridge.set_window_id', ui_id )
-      update_properties( *@properties.keys )
-      @bridge.add_container( self )
-      trigger_event( :ready )
-      nil
-    end
-
     # Called when a control triggers an event.
     # params possibilities:
-    #   "<ui_id>||<event>"
-    #   "<ui_id>||<event>||arg1,arg2,arg3"
+    #   "<callback>||<*arguments>"
     #
     # @param [UI::WebDialog] webdialog
     # @param [String] params
     #
     # @return [Nil]
     # @since 1.0.0
-    def event_callback( webdialog, params )
-      #Debug.puts( '>> Event Callback' )
+    def callback_handler( webdialog, params )
+      #Debug.puts( '>> Callback' )
       #Debug.puts( params )
-      ui_id, event_str, args_str = params.split('||')
-      event = event_str.intern
-      # Catch Debug Console callbacks
-      return Debug.puts( args_str ) if ui_id == 'Console'
-      # Process Control
-      control = find_control_by_ui_id( ui_id )
-      if control
-        if args_str
-          args = args_str.split(',')
-          control.trigger_event( event, *args )
-        else
-          control.trigger_event( event )
-        end
+      callback, *arguments = params.split('||')
+      #Debug.puts( callback )
+      #Debug.puts( arguments )
+      case callback
+      when 'SKUI::Console.log'
+        Debug.puts( *arguments )
+      when 'SKUI::Control.on_event'
+        ui_id, event, *event_arguments = arguments
+        event_control_callback( ui_id, event.intern, *event_arguments )
+      when 'SKUI::Window.on_open_url'
+        event_open_url( arguments[0] )
+      when 'SKUI::Window.on_ready'
+        event_window_ready( webdialog )
       end
     ensure
       # Inform the Webdialog the message was received so it can process any
@@ -301,16 +284,46 @@ module SKUI
       nil
     end
 
-    # Called when a URL link is clicked.
+    # Called when the HTML DOM is ready.
     #
     # @param [UI::WebDialog] webdialog
-    # @param [String] params
     #
     # @return [Nil]
     # @since 1.0.0
-    def event_open_url( webdialog, params )
+    def event_window_ready( webdialog )
+      Debug.puts( '>> Dialog Ready' )
+      @bridge.call( 'Bridge.set_window_id', ui_id )
+      update_properties( *@properties.keys )
+      @bridge.add_container( self )
+      trigger_event( :ready )
+      nil
+    end
+
+    # @param [String] ui_id
+    # @param [Symbol] event
+    #
+    # @return [Nil]
+    # @since 1.0.0
+    def event_control_callback( ui_id, event, *arguments )
+      #Debug.puts( '>> Event Callback' )
+      #Debug.puts( "   > ui_id: #{ui_id}" )
+      #Debug.puts( "   > Event: #{event}" )
+      # Process Control
+      control = find_control_by_ui_id( ui_id )
+      if control
+        control.trigger_event( event, *arguments )
+      end
+    end
+
+    # Called when a URL link is clicked.
+    #
+    # @param [String] url
+    #
+    # @return [Nil]
+    # @since 1.0.0
+    def event_open_url( url )
       Debug.puts( '>> Open URL' )
-      UI.openURL( params )
+      UI.openURL( url )
       nil
     end
 
@@ -371,9 +384,7 @@ module SKUI
       # (i) If procs are created for #add_action_callback in instance methods
       #     then the WebDialog instance will not GC. Call a wrapper that
       #     prevents this.
-      add_callback( webdialog, 'SKUI_Window_Ready',   :event_window_ready )
-      add_callback( webdialog, 'SKUI_Event_Callback', :event_callback )
-      add_callback( webdialog, 'SKUI_Open_URL',       :event_open_url )
+      add_callback( webdialog, 'SKUI_Callback', :callback_handler )
       # (i) There appear to be differences between OS when the HTML content
       #     is prepared. OSX loads HTML on #set_file? Inspect this.
       html_file = File.join( PATH_HTML, 'window.html' )
