@@ -161,12 +161,6 @@ var Bridge = function() {
 
 
     /* Converts Javascript objects into Ruby objects.
-     *
-     * TODO:
-     * * JSON
-     * * ...
-     *
-     * (private ?)
      */
     value_to_ruby : function( value ) {
       var ruby_string = '';
@@ -192,8 +186,8 @@ var Bridge = function() {
           ruby_string = 'nil';
           break;
         case 'array':
-          ruby_values = $.map(value, function(value, index) {
-            return Bridge.value_to_ruby( value );
+          ruby_values = $.map(value, function(array_value, index) {
+            return Bridge.value_to_ruby( array_value );
           });
           ruby_string = '[' + ruby_values.join(',') + ']';
           break;
@@ -202,10 +196,10 @@ var Bridge = function() {
           break;
         case 'regexp':
           // http://www.w3schools.com/jsref/jsref_obj_regexp.asp
-          i = value.ignoreCase ? 'i' : '';
-          g = value.global     ? 'g' : ''; // Not supported in Ruby.
-          m = value.multiline  ? 'm' : '';
-          regex = '/'+value.source+'/'+i+m;
+          var i = value.ignoreCase ? 'i' : '';
+          var g = value.global     ? 'g' : ''; // Not supported in Ruby.
+          var m = value.multiline  ? 'm' : '';
+          var regex = '/'+value.source+'/'+i+m;
           ruby_string = Bridge.value_to_ruby( regex );
           break;
         case 'function':
@@ -213,7 +207,9 @@ var Bridge = function() {
           break;
         case 'object':
           // Assume JSON.
-          ruby_hash = new Array();
+          var ruby_key = '';
+          var ruby_value = '';
+          var ruby_hash = new Array();
           $.each(value, function(k, v) {
             ruby_key   = Bridge.value_to_ruby( k );
             ruby_value = Bridge.value_to_ruby( v );
