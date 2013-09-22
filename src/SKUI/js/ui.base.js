@@ -7,11 +7,13 @@
 
 function Base( jquery_element ) {
   this.control = jquery_element;
+  this.typename = this.constructor.get_typename();
   this.parent = null;
 }
 
 Base.prototype.attach = function() {
   this.control.appendTo( this.parent );
+  this.control.data( 'control_class', this.typename );
   return;
 };
 

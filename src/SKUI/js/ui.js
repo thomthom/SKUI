@@ -152,6 +152,17 @@ var UI = function() {
     },
 
 
+    /* Returns a Control instance from a jQuery or DOM object.
+     */
+    get_control : function( jQuery_or_id ) {
+      var $control = $( jQuery_or_id );
+      var control_class_string = $control.data( 'control_class' );
+      var control_class = eval( control_class_string );
+      var control = new control_class( $control );
+      return control
+    },
+
+
     /* Removes a control from the window. Called from the Ruby side.
      */
     remove_control : function( control ) {
