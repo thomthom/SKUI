@@ -29,8 +29,8 @@ Listbox.add = function( properties ) {
   // Set up events.
   $select.change( function() {
     var $this = $(this);
-    var args = [ $this.val() ];
-    this.callback( 'change', args );
+    var list_control = UI.get_control( $this.parent() );
+    list_control.callback( 'change', $this.val() );
   } );
   // Attach to document.
   control.attach();
