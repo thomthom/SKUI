@@ -5,6 +5,9 @@ $LAB
 .script( path + 'lib/jquery.js' )
 .script( path + 'lib/jquery.textchange.min.js' )
 
+// Utilities
+.script( path + 'utilities.js' ).wait()
+
 // Classes
 .script( path + 'color.js' )
 .script( path + 'point3d.js' )
