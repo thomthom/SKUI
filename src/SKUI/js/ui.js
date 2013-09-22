@@ -155,7 +155,7 @@ var UI = function() {
     /* Removes a control from the window. Called from the Ruby side.
      */
     remove_control : function( control ) {
-      var $control = get_object(control);
+      var $control = get_jQuery_object(control);
       $control.remove();
       return true;
     },
@@ -166,9 +166,9 @@ var UI = function() {
      * the ID of the DOM element.
      */
     update_properties : function( control_or_ui_id, properties ) {
-      var $control = get_object( control_or_ui_id );
+      var $control = get_jQuery_object( control_or_ui_id );
       if ( properties.type in UI ) {
-        control_class = UI[properties.type];
+        var control_class = UI[properties.type];
         var control = new control_class( $control );
         control.update( properties );
         return true;
@@ -187,7 +187,7 @@ var UI = function() {
 
   /* Returns a jQuery object given a jQuery object or DOM id string.
    */
-  function get_object( id_or_object ) {
+  function get_jQuery_object( id_or_object ) {
     if ( $.type( id_or_object ) == 'string' ) {
       return $( '#' + id_or_object );
     }
