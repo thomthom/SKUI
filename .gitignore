@@ -1,6 +1,9 @@
 # Sublime Text
 *.sublime-*
 
+# Firebug Lite
+tools/firebug-lite/
+
 
 ############
 ## Windows
