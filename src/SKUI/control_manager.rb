@@ -30,6 +30,9 @@ module SKUI
       # Add to Webdialog
       if self.window && self.window.visible?
         self.window.bridge.add_control( control )
+        if control.is_a?(ControlManager)
+          self.window.bridge.add_container( control )
+        end
         return true
       end
       false
