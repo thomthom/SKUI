@@ -17,7 +17,7 @@ module SKUI
     # @since 1.0.0
     define_event( :change )
     define_event( :click )
-    
+
     # @param [String] label
     # @param [Boolean] checked
     #
@@ -30,7 +30,7 @@ module SKUI
 
     # @return [Boolean]
     # @since 1.0.0
-    def check!
+    def check
       self.checked = true
     end
 
@@ -42,13 +42,13 @@ module SKUI
 
     # @return [Boolean]
     # @since 1.0.0
-    def toggle!
+    def toggle
       self.checked = !checked?
     end
-    
+
     # @return [Boolean]
     # @since 1.0.0
-    def uncheck!
+    def uncheck
       self.checked = false
     end
 
