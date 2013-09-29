@@ -9,7 +9,7 @@ module SKUI
     # @return [Array<String>]
     # @since 1.0.0
     prop_reader( :items )
-    
+
     # @return [Boolean]
     # @since 1.0.0
     prop_bool( :multiple, &TypeCheck::BOOLEAN )
@@ -20,7 +20,7 @@ module SKUI
 
     # @since 1.0.0
     define_event( :change )
-    
+
     # @param [Array<String>] list
     # @param [Proc] on_click
     #
@@ -140,18 +140,42 @@ module SKUI
       @properties[ :value ] = data
       data
     end
-    
-    # @param [String] string
+
+    # @overload value=(string)
+    #   @param [String] string
+    #   @return [String]
     #
-    # @return [String]
+    # @overload value=(string,...)
+    #   @param [String] string
+    #   @return [Array<String>]
+    #
+    # @overload value=(strings)
+    #   @param [Array<String>] strings
+    #   @return [Array<String>]
     # @since 1.0.0
-    def value=( string )
-      unless @properties[ :items ].include?( string )
-        raise( ArgumentError, "'#{string}' not a valid value in list." )
+    def value=( *args )
+      if args.size == 1 && args[0].is_a?( Array )
+        #return self.value=( *args[0] )
+        return send( :value=, *args[0] )
       end
-      @properties[ :value ] = string
+
+      unless args.all? { |item| item.is_a?( String ) }
+        raise( ArgumentError, 'Arguments must be strings.' )
+      end
+
+      if !self.multiple? && args.size > 1
+        raise( ArgumentError, 'Not configured to select multiple items.' )
+      end
+
+      items = @properties[ :items ]
+      unless (items | args).length == items.length
+        not_in_list = (args - items).join(', ')
+        raise( ArgumentError, "'#{not_in_list}' not valid values in list." )
+      end
+
+      @properties[ :value ] = args
       update_properties( :value )
-      string
+      args
     end
 
   end # class
