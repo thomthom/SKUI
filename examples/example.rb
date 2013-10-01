@@ -70,6 +70,7 @@ group2.add_control( txt_area )
 
 list = %w{ Hello World Lorem Ipsum }
 lst_list = SKUI::Listbox.new( list )
+lst_list.size = 4
 lst_list.multiple = true
 lst_list.value = lst_list.items.first
 lst_list.position( 145, 20 )

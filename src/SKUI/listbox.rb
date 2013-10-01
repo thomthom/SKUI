@@ -12,7 +12,7 @@ module SKUI
 
     # @return [Boolean]
     # @since 1.0.0
-    prop_bool( :multiple, &TypeCheck::BOOLEAN )
+    prop_reader_bool( :multiple, &TypeCheck::BOOLEAN )
 
     # @return [Integer]
     # @since 1.0.0
@@ -34,6 +34,7 @@ module SKUI
        # (?) Should the :items list be a Hash instead? To allow key/value pairs.
       @properties[ :items ] = list
       @properties[ :multiple ] = false
+      @properties[ :size ] = 1
     end
 
     # @overload add_item(string, ...)
@@ -108,6 +109,21 @@ module SKUI
       true
     end
 
+    # @param [Boolean] value
+    #
+    # @return [Boolean]
+    # @since 1.0.0
+    def multiple=( value )
+      value = TypeCheck::BOOLEAN.call( value )
+      if value && self.size < 2
+        raise( ArgumentError,
+          'Can only select multiple when size is greater than 1.' )
+      end
+      @properties[ :multiple ] = value
+      update_properties( :multiple )
+      value
+    end
+
     # @overload remove_item(string)
     #   @param [String] string
     #
@@ -131,6 +147,23 @@ module SKUI
       @properties[ :items ].delete_at( index )
       window.bridge.call( 'UI.Listbox.remove_item', ui_id, index )
       nil
+    end
+
+    # @param [Integer] value
+    #
+    # @return [Integer]
+    # @since 1.0.0
+    def size=( value )
+      value = TypeCheck::INTEGER.call( value )
+      if value < 2
+        @properties[ :size ] = value
+        @properties[ :multiple ] = false
+        update_properties( :size, :multiple )
+      else
+        @properties[ :size ] = value
+        update_properties( :size )
+      end
+      value
     end
 
     # @return [String]
