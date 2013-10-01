@@ -43,6 +43,7 @@ module SKUI
     # @return [Control,Nil]
     # @since 1.0.0
     def find_control_by_ui_id( ui_id )
+      return self if self.ui_id == ui_id
       for control in @controls
         return control if control.ui_id == ui_id
         if control.is_a?( ControlManager )
