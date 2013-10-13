@@ -29,6 +29,9 @@ module SKUI
     define_event( :ready )
 
     # @since 1.0.0
+    define_event( :focus, :blur )
+
+    # @since 1.0.0
     THEME_DEFAULT  = nil
     THEME_GRAPHITE = File.join( PATH_CSS, 'theme_graphite.css' ).freeze
 

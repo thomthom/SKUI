@@ -11,6 +11,12 @@ options = {
 }
 window = SKUI::Window.new( options )
 
+# These events doesn't trigger correctly when Firebug Lite
+# is active because it introduces frames that interfere with
+# the focus notifications.
+window.on( :focus ) { puts 'Window Focus' }
+window.on( :blur ) { puts 'Window Blur' }
+
 group = SKUI::Groupbox.new( 'Groupbox' )
 group.position( 5, 5 )
 group.right = 5
@@ -64,6 +70,7 @@ group2.add_control( txt_area )
 
 list = %w{ Hello World Lorem Ipsum }
 lst_list = SKUI::Listbox.new( list )
+lst_list.size = 4
 lst_list.multiple = true
 lst_list.value = lst_list.items.first
 lst_list.position( 145, 20 )
