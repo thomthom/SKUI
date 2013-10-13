@@ -82,7 +82,7 @@ module SKUI
     # @return [Array(Integer,Integer)]
     # @since 1.0.0
     def client_size
-      @bridge.call( 'Webdialog.get_client_size' )
+      @bridge.call( 'WebDialog.get_client_size' )
     end
 
     # Adjusts the window so the client area fits the given +width+ and +height+.
@@ -99,7 +99,7 @@ module SKUI
       end
       # (!) Cache size difference.
       @webdialog.set_size( width, height )
-      client_width, client_height = get_client_size()
+      client_width, client_height = client_size()
       adjust_width  = width  - client_width
       adjust_height = height - client_height
       unless adjust_width == 0 && adjust_height == 0
