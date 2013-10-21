@@ -4,6 +4,10 @@
 # Firebug Lite
 tools/firebug-lite/
 
+# YARD
+.yardoc
+doc/
+
 
 ############
 ## Windows

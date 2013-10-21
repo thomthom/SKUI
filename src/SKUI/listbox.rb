@@ -22,7 +22,6 @@ module SKUI
     define_event( :change )
 
     # @param [Array<String>] list
-    # @param [Proc] on_click
     #
     # @since 1.0.0
     def initialize( list = [] )
