@@ -358,6 +358,28 @@ module SKUI
       # Ensure the size for fixed windows is set - otherwise SketchUp will use
       # the last saved properties.
       unless options[:resizable]
+        # OSX has a bug where it ignores the resize flag and let the user resize
+        # the window. Setting the min and max values for width and height works
+        # around this issue.
+        #
+        # To make things worse, OSX sets the client size with the min/max
+        # methods - causing the window to grow if you set the min size to the
+        # desired target size. To account for this we set the min sizes to be
+        # a little less that the desired width. The size should be larger than
+        # the titlebar height.
+        #
+        # All this has to be done before we set the size in order to restore the
+        # desired size because the min/max methods will transpose the external
+        # size to content size.
+        #
+        # The result is that the height is adjustable a little bit, but at least
+        # it's restrained to be close to the desired size. Lesser evil until
+        # this is fixed in SketchUp.
+        webdialog.min_width = options[:width]
+        webdialog.max_width = options[:width]
+        webdialog.min_height = options[:height] - 30
+        webdialog.max_height = options[:height]
+
         webdialog.set_size( options[:width], options[:height] )
       end
       # Limit the size of the window. The limits can be either an Integer for
