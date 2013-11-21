@@ -36,7 +36,7 @@ lbl_input.position( 10, 23 )
 lbl_input.width = 50
 group.add_control( lbl_input )
 
-list = %w{ Hello World Lorem Ipsum }
+list = %w{ Hello World Lorem Ipsum Single'Quote Double'Quote }
 lst_dropdown = SKUI::Listbox.new( list )
 lst_dropdown.value = lst_dropdown.items.first
 lst_dropdown.position( 10, -10 )
@@ -68,7 +68,7 @@ txt_area.width = 130
 txt_area.height = 90
 group2.add_control( txt_area )
 
-list = %w{ Hello World Lorem Ipsum }
+list = %w{ Hello World Lorem Ipsum Single'Quote Double'Quote }
 lst_list = SKUI::Listbox.new( list )
 lst_list.size = 4
 lst_list.multiple = true
