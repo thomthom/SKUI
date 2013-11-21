@@ -75,6 +75,14 @@ module SKUI
     }
 
     # @since 1.0.0
+    TEXTALIGN = Proc.new { |value|
+      unless [:left, :center, :right].include?( value )
+        raise( ArgumentError, 'Not n valid alignment value.' )
+      end
+      value
+    }
+
+    # @since 1.0.0
     STRING = Proc.new { |value|
       unless value.respond_to?( :to_s )
         raise( ArgumentError, 'Not a valid String value.' )
