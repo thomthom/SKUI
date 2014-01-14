@@ -1,5 +1,5 @@
 # Sublime Text
-*.sublime-*
+*.sublime-workspace
 
 # Firebug Lite
 tools/firebug-lite/
