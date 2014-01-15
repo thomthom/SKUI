@@ -33,6 +33,16 @@ var WebDialog = function() {
 
     userAgent : function() {
       return navigator.userAgent;
+    },
+
+
+    add_scripts : function(scripts) {
+      var $head = $('head');
+      for (var i = 0; i < scripts.length; ++i)
+      {
+        jQuery.getScript(scripts[i]);
+      }
+      return null;
     }
 
 

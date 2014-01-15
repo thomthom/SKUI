@@ -72,12 +72,27 @@ module SKUI
 
       @properties[:theme] = @options[:theme]
 
+      @scripts = []
+
       # Create a dummy WebDialog here in order for the Bridge to respond in a
       # more sensible manner other than being `nil`. The WebDialog is recreated
       # right before the window is displayed due to a SketchUp bug.
       # @see #show
       @webdialog = UI::WebDialog.new
       @bridge = Bridge.new( self, @webdialog )
+    end
+
+    # Adds the given JavaScript. This allow custom solutions outside of SKUI's
+    # Ruby class wrappers.
+    #
+    # @return [Nil]
+    # @since 1.0.0
+    def add_script(script_file)
+      unless File.exist?(script_file)
+        raise ArgumentError, 'File not found.'
+      end
+      @scripts << script_file
+      nil
     end
 
     # Returns an array with the width and height of the client area.
@@ -296,6 +311,7 @@ module SKUI
     def event_window_ready( webdialog )
       Debug.puts( '>> Dialog Ready' )
       @bridge.call( 'Bridge.set_window_id', ui_id )
+      @bridge.call( 'WebDialog.add_scripts', @scripts ) unless @scripts.empty?
       update_properties( *@properties.keys )
       @bridge.add_container( self )
       trigger_event( :ready )
