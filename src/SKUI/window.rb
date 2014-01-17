@@ -205,6 +205,16 @@ module SKUI
       @options[:title].dup
     end
 
+    # @return [Nil]
+    # @since 1.0.0
+    def toggle
+      if visible?
+        close()
+      else
+        show()
+      end
+    end
+
     # @return [Boolean]
     # @since 1.0.0
     def visible?
