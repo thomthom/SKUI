@@ -48,6 +48,20 @@ body.platform-windows
   background: ThreeDFace;
 }
 
+/* Windows 8.1 (Or IE11?), or setting text scaling will cause text ir appear
+ * too big under Windows. Setting explicit size in points appear to make things
+ * better.
+ */
+.platform-windows,
+.platform-windows input,
+.platform-windows select,
+.platform-windows textarea,
+.platform-windows button,
+.platform-windows legend
+{
+  font-size: 9pt;
+}
+
 
 /*******************************************************************************
  *
