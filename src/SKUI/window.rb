@@ -32,6 +32,9 @@ module SKUI
     define_event( :focus, :blur )
 
     # @since 1.0.0
+    define_event( :scripts_loaded )
+
+    # @since 1.0.0
     THEME_DEFAULT  = nil
     THEME_GRAPHITE = File.join( PATH_CSS, 'theme_graphite.css' ).freeze
 
@@ -73,6 +76,7 @@ module SKUI
       @properties[:theme] = @options[:theme]
 
       @scripts = []
+      @loaded_scripts = []
 
       # Create a dummy WebDialog here in order for the Bridge to respond in a
       # more sensible manner other than being `nil`. The WebDialog is recreated
@@ -304,6 +308,8 @@ module SKUI
         event_open_url( arguments[0] )
       when 'SKUI::Window.on_ready'
         event_window_ready( webdialog )
+      when 'SKUI::Window.on_script_loaded'
+        event_script_loaded( arguments[0] )
       end
     ensure
       # Inform the Webdialog the message was received so it can process any
@@ -321,7 +327,10 @@ module SKUI
     def event_window_ready( webdialog )
       Debug.puts( '>> Dialog Ready' )
       @bridge.call( 'Bridge.set_window_id', ui_id )
-      @bridge.call( 'WebDialog.add_scripts', @scripts ) unless @scripts.empty?
+      unless @scripts.empty?
+        @loaded_scripts.clear
+        @bridge.call( 'WebDialog.add_scripts', @scripts )
+      end
       update_properties( *@properties.keys )
       @bridge.add_container( self )
       trigger_event( :ready )
@@ -353,6 +362,20 @@ module SKUI
     def event_open_url( url )
       Debug.puts( '>> Open URL' )
       UI.openURL( url )
+      nil
+    end
+
+
+    # @param [String] script
+    #
+    # @return [Nil]
+    # @since 1.0.0
+    def event_script_loaded( script )
+      Debug.puts( "SKUI::Window.event_script_loaded(#{script})" )
+      @loaded_scripts << script
+      if @loaded_scripts.sort == @scripts.sort
+        trigger_event( :scripts_loaded )
+      end
       nil
     end
 
