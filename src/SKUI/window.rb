@@ -371,7 +371,7 @@ module SKUI
     # @return [Nil]
     # @since 1.0.0
     def event_script_loaded( script )
-      Debug.puts( "SKUI::Window.event_script_loaded(#{script})" )
+      #Debug.puts( "SKUI::Window.event_script_loaded(#{script})" )
       @loaded_scripts << script
       if @loaded_scripts.sort == @scripts.sort
         trigger_event( :scripts_loaded )
