@@ -93,7 +93,7 @@ module SKUI
     # @since 1.0.0
     def add_script(script_file)
       unless File.exist?(script_file)
-        raise ArgumentError, 'File not found.'
+        raise ArgumentError, "File not found: #{script_file}"
       end
       @scripts << script_file
       nil
