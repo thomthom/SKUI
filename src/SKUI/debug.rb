@@ -34,6 +34,7 @@ module SKUI
         Container,
         Groupbox,
         Image,
+        ImageButton,
         Label,
         Listbox,
         RadioButton,
