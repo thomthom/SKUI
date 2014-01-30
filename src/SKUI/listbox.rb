@@ -31,9 +31,9 @@ module SKUI
       # (?) Check for String content? Convert to strings? Accept #to_a objects?
       super()
        # (?) Should the :items list be a Hash instead? To allow key/value pairs.
-      @properties[ :items ] = list
-      @properties[ :multiple ] = false
-      @properties[ :size ] = 1
+      @properties[ :items ] = list.dup
+      @properties[ :multiple ] = false # Select multiple.
+      @properties[ :size ] = 1 # Makes no sense!
     end
 
     # @overload add_item(string, ...)
@@ -137,8 +137,10 @@ module SKUI
         unless index
           raise( ArgumentError, 'Invalid item.' )
         end
-      else
+      elsif arg.is_a?( Integer )
         index = arg
+      else
+        raise( ArgumentError, 'Invalid argument.' )
       end
       if index < 0 || index >= @properties[ :items ].length
         raise( ArgumentError, 'Index out of range.' )
@@ -205,7 +207,7 @@ module SKUI
         raise( ArgumentError, "'#{not_in_list}' not valid values in list." )
       end
 
-      @properties[ :value ] = args
+      @properties[ :value ] = args.dup
       update_properties( :value )
       args
     end
