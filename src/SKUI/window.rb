@@ -29,6 +29,9 @@ module SKUI
     define_event( :ready )
 
     # @since 1.0.0
+    define_event( :close )
+
+    # @since 1.0.0
     define_event( :focus, :blur )
 
     # @since 1.0.0
@@ -459,6 +462,10 @@ module SKUI
       #     then the WebDialog instance will not GC. Call a wrapper that
       #     prevents this.
       add_callback( webdialog, 'SKUI_Callback', :callback_handler )
+      # Hook up events to capture when the window closes.
+      webdialog.set_on_close {
+        trigger_event( :close )
+      }
       # (i) There appear to be differences between OS when the HTML content
       #     is prepared. OSX loads HTML on #set_file? Inspect this.
       html_file = File.join( PATH_HTML, 'window.html' )
