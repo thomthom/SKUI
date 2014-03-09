@@ -73,7 +73,6 @@ module SKUI
       }
       active_options = defaults.merge( options )
 
-      @window = self
       @options = active_options
 
       @properties[:theme] = @options[:theme]
