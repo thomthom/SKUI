@@ -146,13 +146,13 @@ module SKUI
       @webdialog.close
     end
 
-    # @see Base#release!
+    # @see Base#release
     # @return [Nil]
     # @since 1.0.0
-    def release!
+    def release
       @webdialog.close if @webdialog.visible?
       super
-      @bridge.release!
+      @bridge.release
       @bridge = nil
       @options.clear
       @options = nil

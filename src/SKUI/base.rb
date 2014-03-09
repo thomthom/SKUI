@@ -71,7 +71,7 @@ module SKUI
     #
     # @return [Nil]
     # @since 1.0.0
-    def release!
+    def release
       release_events()
       @properties.clear
       @properties = nil
