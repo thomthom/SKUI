@@ -7,15 +7,19 @@ options = {
   :title           => 'SKUI Control Examples',
   :preferences_key => 'SKUI_Example',
   :width           => 400,
-  :height          => 400
+  :height          => 400,
+  :resizable       => true
 }
 window = SKUI::Window.new( options )
 
 # These events doesn't trigger correctly when Firebug Lite
 # is active because it introduces frames that interfere with
 # the focus notifications.
-window.on( :focus ) { puts 'Window Focus' }
-window.on( :blur ) { puts 'Window Blur' }
+window.on( :focus )  { puts 'Window Focus' }
+window.on( :blur )   { puts 'Window Blur' }
+window.on( :resize ) { |window, width, height|
+  puts "Window Resize(#{width}, #{height})"
+}
 
 group = SKUI::Groupbox.new( 'Groupbox' )
 group.position( 5, 5 )

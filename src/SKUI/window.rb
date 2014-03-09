@@ -35,6 +35,9 @@ module SKUI
     define_event( :focus, :blur )
 
     # @since 1.0.0
+    define_event( :resize )
+
+    # @since 1.0.0
     define_event( :scripts_loaded )
 
     # @since 1.0.0
