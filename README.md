@@ -28,8 +28,7 @@ Once version 1 is release, updates should preserve backwards compatibility withi
 
 ## License
 
-See the `LICENSE` file. It is based on the MIT license, but includes extra requirements that require derived work to ensure it doesn't conflict with the
-original work.
+The library is licensed under the MIT license, but if you fork the project please ensure to change the root namespace so it doesn't conflict with the original work.
 
 # Requirements
 
