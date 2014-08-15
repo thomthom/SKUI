@@ -62,6 +62,17 @@ module SKUI
       nil
     end
 
+    # @param [String] string
+    #
+    # @return [Integer]
+    # @since 1.0.0
+    def index( value )
+      unless value.is_a?(String)
+        raise( ArgumentError, 'Value must be a string.' )
+      end
+      items.index( value )
+    end
+
     # @overload insert(index, string, ...)
     #   @param [String] string
     #
@@ -148,6 +159,28 @@ module SKUI
       @properties[ :items ].delete_at( index )
       window.bridge.call( 'UI.Listbox.remove_item', ui_id, index )
       nil
+    end
+
+    # @param [Integer] index
+    # @param [String] value
+    #
+    # @return [Boolean]
+    # @since 1.0.0
+    def rename( index, value )
+      unless index.is_a?(Integer)
+        raise( ArgumentError, 'Index must be an integer.' )
+      end
+      unless value.is_a?(String)
+        raise( ArgumentError, 'Value must be a string.' )
+      end
+      puts "rename"
+      if index > 0 && index < @properties[ :items ].size
+        @properties[ :items ][ index ] = value
+        window.bridge.call( 'UI.Listbox.rename', ui_id, index, value )
+        true
+      else
+        false
+      end
     end
 
     # @param [Integer] value

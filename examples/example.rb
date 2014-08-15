@@ -80,6 +80,7 @@ group2.add_control( txt_area )
 
 list = %w{ Hello World Lorem Ipsum Single'Quote Double'Quote }
 lst_list = SKUI::Listbox.new( list )
+lst_list.name = :lst_test
 lst_list.size = 4
 lst_list.multiple = true
 lst_list.value = lst_list.items.first

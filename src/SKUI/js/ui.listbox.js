@@ -69,6 +69,14 @@ Listbox.remove_item = function( ui_id, index ) {
   return index;
 };
 
+Listbox.rename = function( ui_id, index, value ) {
+  $control = $('#' + ui_id);
+  $select = $control.children('select');
+  $items = $select.children('option');
+  $items.eq(index).text(value);
+  return;
+};
+
 Listbox.prototype.set_items = function( value ) {
   $select = this.control.children('select');
   $select.empty();
