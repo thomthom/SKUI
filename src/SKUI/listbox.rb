@@ -84,11 +84,15 @@ module SKUI
       return false if items.empty?
       cache_value = self.value
       return false unless cache_value
-      index = items.index( cache_value )
-      return false if index == 0
-      new_index = index - 1
-      remove_item( index )
-      insert( new_index, cache_value )
+      values = cache_value.is_a?( Array ) ? cache_value : [cache_value]
+      values.sort! { |a, b| items.index(a) <=> items.index(b) }
+      values.each { |value|
+        index = items.index( value )
+        return false if index == 0
+        new_index = index - 1
+        remove_item( index )
+        insert( new_index, value )
+      }
       self.value = cache_value
       true
     end
@@ -99,11 +103,16 @@ module SKUI
       return false if items.empty?
       cache_value = self.value
       return false unless cache_value
-      index = items.index( cache_value )
-      return false if index >= items.length - 1
-      new_index = index + 2
-      insert( new_index, cache_value )
-      remove_item( index )
+      values = cache_value.is_a?( Array ) ? cache_value : [cache_value]
+      values.sort! { |a, b| items.index(a) <=> items.index(b) }
+      values.reverse!
+      values.each { |value|
+        index = items.index( value )
+        return false if index >= items.length - 1
+        new_index = index + 2
+        insert( new_index, value )
+        remove_item( index )
+      }
       self.value = cache_value
       true
     end
