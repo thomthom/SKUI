@@ -1,4 +1,10 @@
-load 'SKUI/core.rb'
+begin
+  original_verbose = $VERBOSE
+  $VERBOSE = nil
+  load 'SKUI/core.rb'
+ensure
+  $VERBOSE = original_verbose
+end
 
 module SKUI::Examples
 def self.show
