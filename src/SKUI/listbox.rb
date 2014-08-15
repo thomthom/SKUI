@@ -62,17 +62,6 @@ module SKUI
       nil
     end
 
-    # @param [String] string
-    #
-    # @return [Integer]
-    # @since 1.0.0
-    def index_of( value )
-      unless value.is_a?(String)
-        raise( ArgumentError, 'Value must be a string.' )
-      end
-      items.index( value )
-    end
-
     # @overload insert(index, string, ...)
     #   @param [String] string
     #
@@ -95,7 +84,7 @@ module SKUI
       return false if items.empty?
       cache_value = self.value
       return false unless cache_value
-      index = index_of( cache_value )
+      index = items.index( cache_value )
       return false if index == 0
       new_index = index - 1
       remove_item( index )
@@ -110,7 +99,7 @@ module SKUI
       return false if items.empty?
       cache_value = self.value
       return false unless cache_value
-      index = index_of( cache_value )
+      index = items.index( cache_value )
       return false if index >= items.length - 1
       new_index = index + 2
       insert( new_index, cache_value )
