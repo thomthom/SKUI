@@ -40,11 +40,15 @@ var WebDialog = function() {
       var $head = $('head');
       for (var i = 0; i < scripts.length; ++i)
       {
+        var scripts_loaded = 0;
         var script = scripts[i];
         // Must use a closure to ensure `script` is returned properly.
         (function(script) {
           jQuery.getScript(script, function() {
-            Sketchup.callback('SKUI::Window.on_script_loaded', script);
+            ++scripts_loaded;
+            if (scripts_loaded == scripts.length) {
+              Sketchup.callback('SKUI::Window.on_scripts_loaded');
+            }
           });
         })(scripts[i]);
       }

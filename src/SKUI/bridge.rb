@@ -63,9 +63,9 @@ module SKUI
       # puts "Bridge.execute(#{javascript})" #DEBUG
       unless @webdialog.execute_script( "Bridge.execute(#{javascript})" )
         if @webdialog.visible?
-          raise( CommunicationError, 'Window not visible.' )
-        else
           raise( CommunicationError, 'Unknown error. Ensure DOM is ready.' )
+        else
+          raise( CommunicationError, 'Window not visible.' )
         end
       end
       # (?) Catch JavaScript errors? Or just let the WebDialog display the error?
