@@ -379,7 +379,7 @@ module SKUI
       nil
     end
 
-    # @○param [Hash] options Same as #initialize
+    # @param [Hash] options Same as #initialize
     #
     # @return [UI::WebDialog]
     # @since 1.0.0
@@ -449,10 +449,10 @@ module SKUI
         if options[:height_limit].is_a?( Range )
           minimum = [ 0, options[:height_limit].min ].max
           maximum = options[:height_limit].max
-          webdialog.min_width = minimum
-          webdialog.max_width = maximum if maximum
+          webdialog.min_height = minimum
+          webdialog.max_height = maximum if maximum
         else
-          webdialog.max_width = options[:height_limit]
+          webdialog.max_height = options[:height_limit]
         end
       end
       # (i) If procs are created for #add_action_callback in instance methods
