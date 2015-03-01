@@ -94,7 +94,9 @@ body.platform-windows
 /* undo button padding for the embedded image */
 .control-button img
 {
-  margin: -3px -10px;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 

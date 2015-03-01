@@ -36,6 +36,11 @@ module SKUI
         add_event_handler( :click, &on_click )
       end
     end
+    
+    # @param [String] filename
+    def image( filename )
+      @properties[ :image ] = filename
+    end
 
   end # class
 end # module

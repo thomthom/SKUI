@@ -16,6 +16,10 @@ options = {
   :height          => 400,
   :resizable       => true
 }
+
+path = File.join( SKUI::PATH, '..', '..', 'examples' )
+file = File.join( path, 'cookie.png' )
+
 window = SKUI::Window.new( options )
 
 # These events doesn't trigger correctly when Firebug Lite
@@ -63,6 +67,7 @@ btn_hello = SKUI::Button.new( 'Hello' ) { |control|
 }
 btn_hello.position( -10, -10 )
 btn_hello.tooltip = 'Click me!'
+btn_hello.image( file )
 group.add_control( btn_hello )
 
 group2 = SKUI::Groupbox.new( 'Multiline Text and List' )
@@ -91,9 +96,6 @@ lst_list.on( :change ) { |control, value|
   puts "Listbox value: #{control.value}"
 }
 group2.add_control( lst_list )
-
-path = File.join( SKUI::PATH, '..', '..', 'examples' )
-file = File.join( path, 'cookie.png' )
 
 img_cookie = SKUI::Image.new( file )
 img_cookie.position( 280, 20 )
