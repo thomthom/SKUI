@@ -49,7 +49,7 @@ body.platform-windows
   background: ThreeDFace;
 }
 
-/* Windows 8.1 (Or IE11?), or setting text scaling will cause text ir appear
+/* Windows 8.1 (Or IE11?), or setting text scaling will cause text to appear
  * too big under Windows. Setting explicit size in points appear to make things
  * better.
  */
