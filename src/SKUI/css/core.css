@@ -152,8 +152,17 @@ body.platform-windows
  ******************************************************************************/
 
 
+.control-groupbox
+{
+  /* Patching up due to IE11 displaying 10-15px height difference from IE10 or
+   * WebKit. This appear to bring the appearance on-par.
+   */
+  box-sizing: content-box;
+}
+
 .platform-osx .control-groupbox
 {
+  box-sizing: auto;
   border-width: 1px;
 }
 
