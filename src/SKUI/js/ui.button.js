@@ -45,3 +45,8 @@ Button.prototype.set_caption = function( value ) {
   this.control.text( value );
   return value;
 };
+
+Button.prototype.set_image = function( value ) {
+  this.control.append($('<img/>').attr( 'src', value ))
+  return value;
+};
