@@ -18,6 +18,10 @@ module SKUI
     # @since 1.0.0
     prop_bool( :readonly, &TypeCheck::BOOLEAN )
 
+    # @return [Boolean]
+    # @since 1.0.0
+    prop_bool( :password, &TypeCheck::BOOLEAN )
+
     # @since 1.0.0
     define_event( :change )
     define_event( :textchange )
