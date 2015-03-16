@@ -51,3 +51,10 @@ Textbox.prototype.set_value = function( value ) {
   $textbox.val( value );
   return value;
 };
+
+Textbox.prototype.set_readonly = function( value ) {
+  $textbox = this.control.children('input,textarea');
+  $textbox.prop( 'readonly', value );
+  return value;
+};
+
