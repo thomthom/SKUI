@@ -21,6 +21,8 @@ Textbox.add = function( properties ) {
   $control.addClass('control control-textbox');
   if ( properties.multiline ) {
     var $textbox = $('<textarea/>');
+  } else if ( properties.password ) {
+    var $textbox = $('<input type="password" />');
   } else {
     var $textbox = $('<input type="text" />');
   }
