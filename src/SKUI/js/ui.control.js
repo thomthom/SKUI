@@ -12,6 +12,11 @@ function Control( jquery_element ) {
   Base.call( this, jquery_element );
 }
 
+Control.prototype.set_css_class = function( value ) {
+  this.control.addClass( value );
+  return value;
+};
+
 Control.prototype.set_disabled = function( value ) {
   this.control.toggleClass( 'disabled', value );
   this.control.prop( 'disabled', value );

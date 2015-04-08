@@ -47,6 +47,10 @@ module SKUI
     # @since 1.0.0
     prop_writer( :font_name, :font_size ) # (!) Needs more work.
 
+    # @return [String]
+    # @since 1.0.0
+    prop( :css_class, &TypeCheck::STRING )
+
     # @return [Rect]
     # @since 1.0.0
     attr_reader( :rect )
@@ -55,6 +59,14 @@ module SKUI
     def initialize
       super()
       @rect = Rect.new( self )
+    end
+
+    # Set a custom css class identifier for this control
+    # @since 1.0.0
+    def css_class( css_class )
+      if css_class.is_a? String
+        @properties[ :css_class ] = css_class
+      end
     end
 
     # Positive `x` value will anchor the control to the left side of the
