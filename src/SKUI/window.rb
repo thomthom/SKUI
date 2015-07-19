@@ -369,8 +369,6 @@ module SKUI
     end
 
 
-    # @param [String] script
-    #
     # @return [Nil]
     # @since 1.0.0
     def event_scripts_loaded
