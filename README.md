@@ -47,4 +47,4 @@ _* RGBa colour values will display as opaque RGB in IE8_
 # Documentation
 
 * [Wiki](https://github.com/thomthom/SKUI/wiki)
-* API documentation _([Coming](https://github.com/thomthom/SKUI/issues/5))_
+* [API documentation](http://www.rubydoc.info/github/thomthom/SKUI)
