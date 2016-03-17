@@ -20,8 +20,13 @@ var Bridge = function() {
     /* Prepares the communication bridge.
      */
     init : function() {
-      bridge = $('<input id="SKUI_RUBY_BRIDGE" type="hidden" />');
-      $('body').append( bridge );
+      // TODO: Make textarea.
+      // Ruby => JS
+      ruby_bridge = $('<input id="SKUI_RUBY_BRIDGE" type="hidden" />');
+      $('body').append( ruby_bridge );
+      // JS => Ruby
+      ruby_bridge = $('<input id="SKUI_JS_BRIDGE" type="hidden" />');
+      $('body').append( ruby_bridge );
     },
 
 
@@ -109,8 +114,9 @@ var Bridge = function() {
         message = messages.shift();
         if ( message ) {
           busy = true;
-          uri_message = encodeURIComponent( message.add_slashes() );
-          window.location = 'skp:SKUI_Callback@' + uri_message;
+          command = message.shift();
+          $('#SKUI_JS_BRIDGE').val(message.join( '||' ));
+          window.location = 'skp:SKUI_Callback@' + command;
           return true;
         } else {
           return false;

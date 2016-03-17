@@ -18,8 +18,8 @@ var Sketchup = function() {
      */
     callback : function( event_name /*, *args*/ ) {
       var args = Array.prototype.slice.call( arguments );
-      var message = args.join( '||' );
-      Bridge.queue_message( message );
+      //var message = args.join( '||' );
+      Bridge.queue_message( args );
     },
 
     /* Relay control events back to the webdialog.
