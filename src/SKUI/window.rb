@@ -257,7 +257,7 @@ module SKUI
     # @return [Nil]
     # @since 1.0.0
     def self.add_callback( webdialog, callback_name, method_id )
-      Debug.puts("add_callback(#{webdialog}, #{callback_name}, #{method_id})")
+      #Debug.puts("add_callback(#{webdialog}, #{callback_name}, #{method_id})")
       webdialog.add_action_callback( callback_name ) { |wd, callback|
         window = nil
         ObjectSpace.each_object( Bridge ) { |bridge|
@@ -267,7 +267,7 @@ module SKUI
           end
         }
         params = wd.get_element_value('SKUI_JS_BRIDGE')
-        Debug.puts("> add_callback(#{callback_name}, #{method_id})")
+        #Debug.puts("> add_callback(#{callback_name}, #{method_id})")
         arguments = params.split('||')
         window.send( method_id, wd, callback, arguments )
       }
@@ -301,15 +301,15 @@ module SKUI
     # @return [Nil]
     # @since 1.0.0
     def callback_handler( webdialog, callback, arguments )
-      Debug.puts( '>> Callback' )
-      Debug.puts( callback )
-      Debug.puts( arguments )
+      #Debug.puts( '>> Callback' )
+      #Debug.puts( callback )
+      #Debug.puts( arguments )
       case callback
       when 'SKUI::Console.log'
         Debug.puts( *arguments )
       when 'SKUI::Control.on_event'
-        Debug.puts( '  > SKUI::Control.on_event' )
-        Debug.puts(arguments)
+        #Debug.puts( '  > SKUI::Control.on_event' )
+        #Debug.puts(arguments)
         ui_id, event, *event_arguments = arguments
         event_control_callback( ui_id, event.intern, *event_arguments )
       when 'SKUI::Window.on_open_url'
