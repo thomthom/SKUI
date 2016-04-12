@@ -107,7 +107,7 @@ var UI = function() {
      */
     disable_select : function() {
       $(document).on('mousedown selectstart', function(e) {
-        return $(e.target).is('input, textarea, select, option');
+        return $(e.target).is('input, textarea, select, option, .selectable');
       });
     },
 
