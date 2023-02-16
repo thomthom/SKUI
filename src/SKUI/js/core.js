@@ -31,6 +31,7 @@ $LAB
 .script( path + 'ui.container.js' )
 .script( path + 'ui.groupbox.js' )
 .script( path + 'ui.image.js' )
+.script( path + 'ui.imagebutton.js' )
 .script( path + 'ui.label.js' )
 .script( path + 'ui.listbox.js' )
 .script( path + 'ui.radiobutton.js' )
